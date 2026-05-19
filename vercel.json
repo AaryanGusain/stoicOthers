@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "book.stoicmeditations.com" }],
+      "destination": "/apps/book/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "audio.stoicmeditations.com" }],
+      "destination": "/apps/audiobook/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "wallpapers.stoicmeditations.com" }],
+      "destination": "/apps/wallpapers/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/apps/main/$1"
+    }
+  ]
+}

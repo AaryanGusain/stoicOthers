@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stoic Meditations · Daily Wisdom from the Strongest Minds in History</title>
+<meta name="description" content="Daily Stoic wisdom and reflections from Marcus Aurelius, Seneca, Epictetus, and the strongest minds in history. Five free lessons sent instantly when you sign up.">
+<meta property="og:title" content="Stoic Meditations">
+<meta property="og:description" content="Daily Stoic wisdom and reflections from the strongest minds in history.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f6f1e7">
+<!-- TODO: GA4 / Plausible -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #ede5d3;
+  --paper-warm: #f0e9d8;
+  --ink: #1c1a17;
+  --rule: #c8bda7;
+  --accent: #6b4d2a;
+  --gold: #c9a253;
+  --muted: #75695b;
+  --dotted: #d8cdb8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--paper-warm) 0%, var(--paper) 55%),
+    var(--paper);
+  padding: 0.9rem 1.25rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  max-width: 960px; width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Header ===== */
+.topbar { text-align: center; padding: 0 0 0.5rem; }
+
+.monogram {
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  margin: 0 auto 0.6rem;
+  position: relative;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 26px -12px rgba(28, 26, 23, 0.5);
+}
+.monogram::after {
+  content: '';
+  position: absolute; inset: -5px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+.monogram svg {
+  width: 34px; height: 34px;
+  display: block;
+}
+
+.wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem; font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+.wordmark::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: 0;
+  transform: translateX(-50%);
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 0.94rem; line-height: 1.4;
+  max-width: 400px; margin: 0 auto;
+}
+
+/* ===== Ornamental divider ===== */
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0.9rem;
+  margin: 0.55rem auto 0.85rem;
+  max-width: 360px;
+  color: var(--gold);
+}
+.divider .line {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--rule), transparent);
+}
+.divider .orn {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* ===== Grid: subscribe (L) + cards (R) ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+@media (min-width: 760px) {
+  .grid { grid-template-columns: 1fr 1.1fr; gap: 1.4rem; align-items: stretch; }
+}
+
+/* ===== Subscribe card (left) ===== */
+.subscribe {
+  position: relative;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.3rem 1.4rem 1.1rem;
+  text-align: center;
+  box-shadow: 0 18px 40px -28px rgba(28, 26, 23, 0.3);
+  display: flex; flex-direction: column;
+}
+.subscribe::before, .subscribe::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.55;
+}
+.subscribe::before { top: 10px; left: 10px;  border-width: 1px 0 0 1px; }
+.subscribe::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+.eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.66rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+  font-weight: 500;
+}
+.subscribe .eyebrow { margin-bottom: 0.55rem; }
+.subscribe h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 500;
+  line-height: 1.22;
+  margin-bottom: 0.4rem;
+}
+.subscribe h2 strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+.subscribe .subhead {
+  color: var(--muted);
+  font-size: 0.95rem; line-height: 1.45;
+  margin: 0 auto 1rem;
+  max-width: 340px;
+}
+
+.subscribe form { display: flex; flex-direction: column; gap: 0.5rem; }
+.subscribe input {
+  padding: 0.9rem 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  outline: none; color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.subscribe input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(107, 77, 42, 0.08);
+}
+.subscribe button {
+  padding: 0.95rem 1rem;
+  background: var(--ink); color: var(--paper);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: none; border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.12s ease;
+}
+.subscribe button:hover { background: var(--accent); transform: translateY(-1px); }
+.subscribe .fineprint {
+  margin-top: 0.7rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.14em;
+  color: var(--muted); text-transform: uppercase;
+}
+
+.subscribe .thanks { display: none; }
+.subscribe.submitted form,
+.subscribe.submitted .subhead,
+.subscribe.submitted .eyebrow,
+.subscribe.submitted h2,
+.subscribe.submitted .fineprint { display: none; }
+.subscribe.submitted .thanks { display: block; margin-top: 1.5rem; }
+.thanks .check {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; color: var(--gold);
+  line-height: 1; margin-bottom: 0.45rem;
+}
+.thanks h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 500;
+  line-height: 1.2; margin-bottom: 0.5rem;
+}
+.thanks p { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+
+/* ===== Resource cards (right) ===== */
+.cards {
+  display: flex; flex-direction: column;
+  gap: 0.55rem;
+}
+.card {
+  position: relative;
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.9rem 1.1rem 0.9rem 0.95rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
+  flex: 1;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  opacity: 0.5;
+  transition: opacity 0.15s ease, width 0.18s ease;
+}
+.card:hover {
+  background: var(--paper-deep);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.card:hover::before { opacity: 1; width: 3px; }
+
+.card .numeral {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--accent);
+  width: 1.9rem;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.card-body { flex: 1; min-width: 0; }
+.card .eyebrow {
+  font-size: 0.58rem; letter-spacing: 0.22em;
+  margin-bottom: 0.2rem;
+}
+.card .title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 0.12rem;
+}
+.card .desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.93rem; line-height: 1.35;
+  color: var(--muted);
+}
+.card .arrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.18s ease, color 0.15s ease;
+  line-height: 1;
+}
+.card:hover .arrow { transform: translateX(4px); color: var(--gold); }
+
+.card.disabled {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+.card.disabled .numeral { color: var(--muted); opacity: 0.6; }
+.card.disabled::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--rule) 0, var(--rule) 3px,
+    transparent 3px, transparent 6px
+  );
+  opacity: 0.7;
+}
+.card.disabled .arrow { display: none; }
+
+/* ===== Footnote quote ===== */
+.footnote {
+  text-align: center;
+  max-width: 480px;
+  margin: 0.3rem auto 0.75rem;
+  padding: 0 1rem;
+  color: var(--muted);
+}
+.footnote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  margin-bottom: 0.3rem;
+}
+.footnote cite {
+  font-family: 'Inter Tight', sans-serif;
+  font-style: normal;
+  font-size: 0.58rem; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding-top: 0.7rem;
+  margin-top: auto;
+  border-top: 1px solid var(--dotted);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+}
+footer .row {
+  display: flex; justify-content: center; align-items: center;
+  gap: 0.85rem; flex-wrap: wrap;
+}
+footer a { color: var(--muted); text-decoration: none; transition: color 0.15s ease; }
+footer a:hover { color: var(--accent); }
+footer .dot { opacity: 0.5; }
+
+/* ===== Small-screen polish ===== */
+@media (max-width: 420px) {
+  body { padding: 1.25rem 1rem 1.5rem; }
+  .topbar { padding: 0 0 0.75rem; }
+  .monogram { width: 60px; height: 60px; }
+  .monogram span { font-size: 1.45rem; }
+  .wordmark { font-size: 1.7rem; }
+  .tagline { font-size: 0.95rem; }
+  .subscribe { padding: 1.4rem 1.25rem 1.15rem; }
+  .subscribe h2 { font-size: 1.35rem; }
+  .card { padding: 0.95rem 1rem; }
+  .card .title { font-size: 1.13rem; }
+  .card .numeral { font-size: 1.35rem; width: 1.7rem; }
+  .footnote p { font-size: 0.96rem; }
+}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <header class="topbar">
+    <div class="monogram" aria-hidden="true">
+      <!-- Doric column: Stoa = the painted porch where Zeno founded Stoicism -->
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <g fill="#c9a253">
+          <!-- Capital -->
+          <rect x="10" y="11" width="28" height="2.4" rx="0.4"/>
+          <rect x="12" y="14.2" width="24" height="1.4"/>
+        </g>
+        <!-- Shaft fluting -->
+        <g stroke="#c9a253" stroke-width="1.4" stroke-linecap="round" fill="none">
+          <line x1="17.5" y1="17.2" x2="17.5" y2="32.8"/>
+          <line x1="24"   y1="17.2" x2="24"   y2="32.8"/>
+          <line x1="30.5" y1="17.2" x2="30.5" y2="32.8"/>
+        </g>
+        <g fill="#c9a253">
+          <!-- Base -->
+          <rect x="12" y="33.4" width="24" height="1.4"/>
+          <rect x="10" y="35.6" width="28" height="2.4" rx="0.4"/>
+          <!-- Plinth -->
+          <rect x="8"  y="38.6" width="32" height="1.8" rx="0.4"/>
+        </g>
+      </svg>
+    </div>
+    <div class="wordmark">Stoic Meditations</div>
+    <p class="tagline">Daily Stoic wisdom and reflections from the strongest minds in history.</p>
+  </header>
+
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <span class="orn">◆</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT: primary email capture -->
+    <section class="subscribe" id="subscribe">
+      <div class="eyebrow">5 Free Lessons</div>
+      <h2><strong>Five Stoic lessons</strong>, in your inbox the moment you sign up.</h2>
+      <p class="subhead">A short introduction to the practice of Stoicism. All five sent at once.</p>
+      <form id="subscribeForm" novalidate>
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email address">
+        <button type="submit">Send me the lessons</button>
+      </form>
+      <div class="fineprint">No spam · unsubscribe in one click</div>
+      <div class="thanks" role="status" aria-live="polite">
+        <div class="check">✓</div>
+        <h2>All five are on the way.</h2>
+        <p>Check your inbox in a few minutes. The lessons should land any second now.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: resource cards -->
+    <section class="cards" aria-label="Resources">
+
+      <a class="card" href="https://book.stoicmeditations.com" target="_blank" rel="noopener">
+        <span class="numeral" aria-hidden="true">I</span>
+        <div class="card-body">
+          <div class="eyebrow">The Reader</div>
+          <div class="title">14 Days to a Stoic Mind</div>
+          <div class="desc">14 masters, 42 pages, ten minutes a day.</div>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a class="card" href="#subscribe" id="scrollToSubscribe">
+        <span class="numeral" aria-hidden="true">II</span>
+        <div class="card-body">
+          <div class="eyebrow">Newsletter</div>
+          <div class="title">5 Free Stoic Lessons</div>
+          <div class="desc">Five short lessons, sent the moment you sign up.</div>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a class="card" href="https://audio.stoicmeditations.com" target="_blank" rel="noopener">
+        <span class="numeral" aria-hidden="true">III</span>
+        <div class="card-body">
+          <div class="eyebrow">The Audiobook</div>
+          <div class="title">14 Days, Now Narrated</div>
+          <div class="desc">98 minutes of audio. Pick from three voices.</div>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a class="card" href="https://wallpapers.stoicmeditations.com" target="_blank" rel="noopener">
+        <span class="numeral" aria-hidden="true">IV</span>
+        <div class="card-body">
+          <div class="eyebrow">Wallpapers</div>
+          <div class="title">Three Wallpaper Bundles</div>
+          <div class="desc">20 wallpapers each. Phone, tablet, desktop. $5.</div>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+    </section>
+
+  </div>
+
+  <blockquote class="footnote">
+    <p>"Look within. Within is the fountain of good, and it will ever bubble up, if thou wilt ever dig."</p>
+    <cite>Marcus Aurelius · Meditations 7.59</cite>
+  </blockquote>
+
+  <footer>
+    <div class="row">
+      <span>© 2026 · Stoic Meditations</span>
+      <span class="dot">·</span>
+      <a href="https://instagram.com/stoicismwidget" target="_blank" rel="noopener">@stoicismwidget</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  // === Kit (ConvertKit) form ID ===
+  // After creating the "Five Free Stoic Lessons" form in Kit, copy the numeric ID
+  // from the form's URL (kit.com/forms/<ID>/edit) and paste it below.
+  // See docs/kit-setup.md for the full setup walkthrough.
+  const KIT_FORM_ID = 'REPLACE_WITH_KIT_FORM_ID';
+
+  const SUB_KEY = 'sm_main_subscribe_v1';
+  const subSection = document.getElementById('subscribe');
+  const subForm = document.getElementById('subscribeForm');
+  const scrollLink = document.getElementById('scrollToSubscribe');
+  const emailInput = subForm.querySelector('input[type=email]');
+
+  if (localStorage.getItem(SUB_KEY)) {
+    subSection.classList.add('submitted');
+  }
+
+  subForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    // Optimistic UI: flip to success state immediately. Kit's confirmation email
+    // is the real receipt — the network call is fire-and-forget.
+    localStorage.setItem(SUB_KEY, 'subscribed:' + email);
+    subSection.classList.add('submitted');
+
+    if (KIT_FORM_ID && KIT_FORM_ID !== 'REPLACE_WITH_KIT_FORM_ID') {
+      fetch('https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email_address: email })
+      }).catch(function () { /* swallow: optimistic flow already shown */ });
+    } else {
+      console.warn('[Kit] KIT_FORM_ID not configured. Email captured locally only:', email);
+    }
+  });
+
+  scrollLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    subSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (subSection.classList.contains('submitted')) return;
+    setTimeout(function () { emailInput.focus({ preventScroll: true }); }, 480);
+  });
+})();
+</script>
+
+</body>
+</html>

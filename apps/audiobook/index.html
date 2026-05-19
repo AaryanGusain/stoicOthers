@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 Days to a Stoic Mind · The Audiobook</title>
+<meta name="description" content="The audiobook of 14 Days to a Stoic Mind. Ninety-eight minutes with fourteen masters of wisdom, narrated in your choice of three voices. M4B audiobook plus individual MP3 chapters.">
+<meta property="og:title" content="14 Days to a Stoic Mind · Audiobook">
+<meta property="og:description" content="The full reader, narrated. Pick your voice.">
+<meta name="theme-color" content="#f6f1e7">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #ede5d3;
+  --ink: #1c1a17;
+  --rule: #c8bda7;
+  --accent: #6b4d2a;
+  --gold: #c9a253;
+  --muted: #75695b;
+  --dotted: #d8cdb8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* ------- Sticky top nav ------- */
+nav.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 241, 231, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.9rem 0;
+}
+nav.top .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+nav.top .wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 500; letter-spacing: 0.01em;
+}
+nav.top .right { display: flex; gap: 1.5rem; align-items: center; }
+nav.top a {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; font-weight: 500;
+}
+nav.top a:hover { color: var(--accent); }
+nav.top .buy {
+  background: var(--ink); color: var(--paper);
+  padding: 0.5rem 1rem; border-radius: 2px;
+}
+nav.top .buy:hover { color: var(--paper); background: var(--accent); }
+
+/* ------- Hero ------- */
+.hero { padding: 4.5rem 0 5rem; }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1.15fr;
+  gap: 4rem; align-items: center;
+}
+
+/* Audiobook showcase — the cover fills the box edge-to-edge */
+.audio-showcase {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -25px rgba(0,0,0,0.45);
+  aspect-ratio: 2 / 3;
+}
+.cover-image {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ------- Hero copy ------- */
+.hero-copy { padding-left: 1rem; }
+.hero-copy .eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  font-weight: 500; margin-bottom: 1.5rem;
+}
+.hero-copy h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.4rem; font-weight: 500; line-height: 1.04;
+  margin-bottom: 1.5rem; letter-spacing: -0.01em;
+}
+.hero-copy .hook {
+  font-size: 1.2rem; line-height: 1.55;
+  color: var(--ink); margin-bottom: 2.5rem; max-width: 500px;
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-bottom: 2.5rem; padding: 1.25rem 0;
+  border-top: 1px solid var(--dotted);
+  border-bottom: 1px solid var(--dotted);
+}
+.hero-meta .stat .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 500; line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.hero-meta .stat .label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.cta-row { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink); color: var(--paper);
+  padding: 1.05rem 2.25rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 0.75rem;
+  transition: background 0.18s ease, transform 0.12s ease;
+  border-radius: 2px;
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-primary .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 500; opacity: 0.85;
+  letter-spacing: 0.01em; text-transform: none;
+}
+.btn-secondary {
+  color: var(--ink); background: transparent;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+  cursor: pointer; border: none;
+}
+.btn-secondary:hover { color: var(--accent); }
+
+/* ------- Section frame ------- */
+section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
+.section-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--muted);
+  text-align: center; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 500; line-height: 1.15;
+  text-align: center; margin-bottom: 1rem;
+  letter-spacing: -0.005em;
+}
+.section-sub {
+  text-align: center; color: var(--muted);
+  font-size: 1.05rem; max-width: 600px;
+  margin: 0 auto 3.5rem;
+}
+
+/* ------- Voice picker (key custom section) ------- */
+.voice-picker {
+  max-width: 720px; margin: 0 auto;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2.5rem 2.5rem 2rem;
+  box-shadow: 0 30px 80px -30px rgba(28, 26, 23, 0.25);
+}
+.voice-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem; margin-bottom: 1.75rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.35rem;
+}
+.voice-tab {
+  background: transparent; border: none;
+  padding: 0.7rem 0.5rem 0.75rem;
+  cursor: pointer; border-radius: 2px;
+  font-family: 'Inter Tight', sans-serif;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease;
+  display: flex; flex-direction: column; gap: 0.15rem;
+  color: var(--muted);
+}
+.voice-tab .tab-eyebrow {
+  font-size: 0.55rem; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 500;
+  opacity: 0.7;
+}
+.voice-tab .tab-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 500;
+  color: inherit;
+}
+.voice-tab:hover { color: var(--ink); }
+.voice-tab.active {
+  background: var(--ink); color: var(--paper);
+}
+.voice-tab.active .tab-eyebrow { color: var(--gold); opacity: 1; }
+.voice-tab.active .tab-name { color: var(--paper); }
+
+.player-row {
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 0.6rem 0 0.4rem;
+}
+.play-btn {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s ease, transform 0.12s ease;
+  box-shadow: 0 8px 20px -8px rgba(28, 26, 23, 0.5);
+}
+.play-btn:hover { background: var(--accent); transform: scale(1.05); }
+.play-btn svg { width: 22px; height: 22px; }
+.play-btn .pause-icon { display: none; }
+.play-btn.playing .play-icon { display: none; }
+.play-btn.playing .pause-icon { display: block; }
+
+.player-info { flex: 1; min-width: 0; }
+.player-info .now-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  font-weight: 500; margin-bottom: 0.25rem;
+}
+.player-info .now-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 500; line-height: 1.15;
+  margin-bottom: 0.15rem;
+}
+.player-info .now-meta {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: var(--muted);
+}
+
+.progress {
+  margin-top: 1.1rem;
+  height: 3px; width: 100%;
+  background: var(--rule);
+  border-radius: 2px; overflow: hidden;
+}
+.progress .bar {
+  height: 100%; width: 0;
+  background: var(--accent);
+  transition: width 0.15s linear;
+}
+
+/* ------- Voices grid (reuse from book site) ------- */
+.voices-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
+}
+.voice-card {
+  background: var(--paper); padding: 1.6rem 1.5rem;
+  display: flex; flex-direction: column;
+  transition: background 0.18s ease;
+}
+.voice-card:hover { background: var(--paper-deep); }
+.voice-card .day {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem; font-weight: 500;
+}
+.voice-card .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 500;
+  margin-bottom: 0.2rem; line-height: 1.15;
+}
+.voice-card .era {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: var(--muted);
+  margin-bottom: 0.4rem; letter-spacing: 0.04em;
+}
+.voice-card .duration {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+/* ------- What you get ------- */
+.includes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; max-width: 800px; margin: 0 auto;
+}
+.include-tile {
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  padding: 1.75rem 1.5rem;
+  border-radius: 3px; text-align: center;
+}
+.include-tile .icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; color: var(--accent);
+  font-style: italic; line-height: 1;
+  margin-bottom: 0.7rem;
+}
+.include-tile h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 500;
+  margin-bottom: 0.4rem; line-height: 1.2;
+}
+.include-tile p {
+  font-size: 0.9rem; color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ------- Pricing ------- */
+.pricing-card {
+  background: var(--ink); color: var(--paper);
+  padding: 3.5rem 3rem;
+  max-width: 480px; margin: 0 auto;
+  border-radius: 4px; text-align: center;
+  box-shadow: 0 40px 100px -40px rgba(28, 26, 23, 0.45);
+}
+.pricing-card .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem; font-weight: 500; line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.pricing-card .price-sub {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.6;
+  margin-bottom: 2.5rem; font-weight: 500;
+}
+.pricing-card ul {
+  list-style: none; padding: 0; margin: 0 0 2.5rem; text-align: left;
+}
+.pricing-card li {
+  padding: 0.75rem 0; font-size: 1rem;
+  border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+  font-family: 'Cormorant Garamond', serif;
+  display: flex; align-items: baseline; gap: 0.75rem;
+}
+.pricing-card li:last-child { border-bottom: none; }
+.pricing-card li::before {
+  content: '·'; color: var(--gold);
+  font-size: 1.5rem; line-height: 1; opacity: 0.8;
+}
+.pricing-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.pricing-form input {
+  padding: 1rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+  background: rgba(246, 241, 231, 0.08);
+  border: 1px solid rgba(246, 241, 231, 0.18);
+  border-radius: 2px; outline: none;
+  color: var(--paper);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pricing-form input::placeholder { color: rgba(246, 241, 231, 0.4); }
+.pricing-form input:focus {
+  border-color: var(--gold); background: rgba(246, 241, 231, 0.12);
+}
+.pricing-form button {
+  background: var(--paper); color: var(--ink);
+  padding: 1.1rem 2rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  border: none; cursor: pointer; border-radius: 2px;
+  transition: background 0.18s ease;
+}
+.pricing-form button:hover { background: var(--gold); color: var(--ink); }
+.pricing-card .form-fineprint {
+  margin-top: 1rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.5;
+}
+/* ------- Footer ------- */
+footer {
+  background: var(--ink); color: var(--paper);
+  padding: 4rem 0 2.5rem; margin-top: 0;
+}
+footer .container.top-row {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+}
+footer .left .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 500;
+}
+footer .left .meta {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: rgba(246, 241, 231, 0.55);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+footer .right { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+footer .right a {
+  color: var(--paper); text-decoration: none;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.18em;
+  text-transform: uppercase; padding: 0.5rem 1rem;
+  border: 1px solid rgba(246, 241, 231, 0.15);
+  border-radius: 2px; transition: all 0.18s ease;
+}
+footer .right a:hover {
+  background: var(--paper); color: var(--ink);
+  border-color: var(--paper);
+}
+footer .copyright {
+  margin-top: 2rem; text-align: center;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; color: rgba(246, 241, 231, 0.35);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+
+/* ------- Responsive ------- */
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .audio-showcase { max-width: 320px; margin: 0 auto; }
+  .hero-copy { padding-left: 0; text-align: center; }
+  .hero-copy h1 { font-size: 2.3rem; }
+  .hero-copy .hook { margin: 0 auto 2rem; }
+  .hero-meta { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  .hero-meta .stat .num { font-size: 1.5rem; }
+  .cta-row { justify-content: center; }
+  .voices-grid { grid-template-columns: 1fr; }
+  .includes-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.8rem; }
+  .container { padding: 0 1.25rem; }
+  .hero { padding: 3rem 0 4rem; }
+  section.block { padding: 4rem 0; }
+  .voice-picker { padding: 1.75rem 1.25rem 1.5rem; }
+  .voice-tabs { gap: 0.2rem; padding: 0.25rem; }
+  .voice-tab { padding: 0.55rem 0.3rem 0.6rem; }
+  .voice-tab .tab-name { font-size: 0.92rem; }
+  .voice-tab .tab-eyebrow { font-size: 0.5rem; letter-spacing: 0.16em; }
+  .pricing-card { padding: 2.5rem 1.75rem; }
+  .pricing-card .price { font-size: 3.5rem; }
+  footer .container.top-row { flex-direction: column; align-items: stretch; }
+  nav.top a { font-size: 0.65rem; letter-spacing: 0.14em; }
+  nav.top .wordmark { font-size: 0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Top nav ===== -->
+<nav class="top">
+  <div class="container">
+    <div class="wordmark">14 Days · Audiobook</div>
+    <div class="right">
+      <a href="#listen">Listen</a>
+      <a href="#voices">The Masters</a>
+      <a href="https://instagram.com/stoicismwidget" target="_blank">Instagram</a>
+      <a class="buy" href="#pricing">Buy · $10</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <!-- Cover image fills the showcase box edge-to-edge -->
+    <div class="audio-showcase" aria-label="Audiobook cover">
+      <img src="cover.png" alt="14 Days to a Stoic Mind audiobook cover" class="cover-image">
+    </div>
+
+    <div class="hero-copy">
+      <div class="eyebrow">The Audiobook · 98 Minutes</div>
+      <h1>The full reader. Now narrated.</h1>
+      <p class="hook">Ninety-eight minutes with fourteen masters of wisdom, in your choice of three voices. Listen on your commute, your run, or your evening walk. Same words as the book. Now spoken in your ear.</p>
+
+      <div class="hero-meta">
+        <div class="stat"><div class="num">14</div><div class="label">Masters</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">Voices</div></div>
+        <div class="stat"><div class="num">98</div><div class="label">Minutes</div></div>
+        <div class="stat"><div class="num">M4B</div><div class="label">+ MP3</div></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn-primary" href="#pricing">Get the audiobook <span class="price">· $10</span></a>
+        <a class="btn-secondary" href="#listen">Sample the voices</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Voice picker / sample player ===== -->
+<section class="block" id="listen">
+  <div class="container">
+    <div class="section-label">Pick Your Narrator</div>
+    <h2 class="section-title">Three voices. Sample each one.</h2>
+    <p class="section-sub">Every chapter is recorded in all three voices. You choose which one you want to listen to. Same words, different reader.</p>
+
+    <div class="voice-picker">
+      <div class="voice-tabs" role="tablist" aria-label="Choose a narrator">
+        <button class="voice-tab active" role="tab" data-voice="am_michael" data-src="samples/am_michael.mp3">
+          <span class="tab-eyebrow">American Male</span>
+          <span class="tab-name">Michael</span>
+        </button>
+        <button class="voice-tab" role="tab" data-voice="af_heart" data-src="samples/af_heart.mp3">
+          <span class="tab-eyebrow">American Female</span>
+          <span class="tab-name">Heart</span>
+        </button>
+        <button class="voice-tab" role="tab" data-voice="bm_george" data-src="samples/bm_george.mp3">
+          <span class="tab-eyebrow">British Male</span>
+          <span class="tab-name">George</span>
+        </button>
+      </div>
+
+      <div class="player-row">
+        <button class="play-btn" id="playBtn" aria-label="Play sample">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5 L8 19 L19 12 Z"/>
+          </svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="0.5"/>
+            <rect x="14" y="5" width="4" height="14" rx="0.5"/>
+          </svg>
+        </button>
+        <div class="player-info">
+          <div class="now-label">Sample · Day 1</div>
+          <div class="now-title">Marcus Aurelius · Look Within</div>
+          <div class="now-meta" id="nowMeta">American male · 30s preview</div>
+        </div>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+
+      <audio id="sampleAudio" preload="auto" src="samples/am_michael.mp3"></audio>
+    </div>
+  </div>
+</section>
+
+<!-- ===== What's in the bundle ===== -->
+<section class="block" id="includes">
+  <div class="container">
+    <div class="section-label">What You Download</div>
+    <h2 class="section-title">Everything in one bundle.</h2>
+    <p class="section-sub">Three complete recordings of the book. Choose the format that fits your player. Files are yours forever.</p>
+
+    <div class="includes-grid">
+      <div class="include-tile">
+        <div class="icon">M</div>
+        <h4>3 × M4B audiobook</h4>
+        <p>Chapter-marked, single-file. Drops cleanly into Apple Books, Audiobookshelf, Plex, or any audiobook player.</p>
+      </div>
+      <div class="include-tile">
+        <div class="icon">♪</div>
+        <h4>42 × MP3 chapters</h4>
+        <p>Individual chapter files for podcast apps and standard music players. Skip, scrub, and resume per chapter.</p>
+      </div>
+      <div class="include-tile">
+        <div class="icon">∞</div>
+        <h4>Yours forever</h4>
+        <p>One payment. No subscription. No DRM. Re-download from your receipt any time, on any device, in any year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 14 Voices (the masters, with chapter durations) ===== -->
+<section class="block" id="voices">
+  <div class="container">
+    <div class="section-label">What You Will Hear</div>
+    <h2 class="section-title">Fourteen Masters Across Twenty-Five Centuries</h2>
+    <p class="section-sub">One chapter a day. Each runs five to seven minutes. Listen in order, or jump to the voice that calls you today.</p>
+
+    <div class="voices-grid">
+      <div class="voice-card"><div class="day">Day 1 · 6:46</div><div class="name">Marcus Aurelius</div><div class="era">121–180 CE · Roman Stoic Emperor</div></div>
+      <div class="voice-card"><div class="day">Day 2 · 6:30</div><div class="name">Seneca</div><div class="era">c. 4 BCE – 65 CE · Roman Statesman</div></div>
+      <div class="voice-card"><div class="day">Day 3 · 6:25</div><div class="name">Confucius</div><div class="era">551–479 BCE · Chinese Sage</div></div>
+      <div class="voice-card"><div class="day">Day 4 · 6:40</div><div class="name">Epictetus</div><div class="era">c. 50–135 CE · Greek Stoic Teacher</div></div>
+      <div class="voice-card"><div class="day">Day 5 · 6:35</div><div class="name">Sun Tzu</div><div class="era">c. 5th c. BCE · Chinese Strategist</div></div>
+      <div class="voice-card"><div class="day">Day 6 · 6:30</div><div class="name">Miyamoto Musashi</div><div class="era">1584–1645 · Japanese Kensei</div></div>
+      <div class="voice-card"><div class="day">Day 7 · 6:45</div><div class="name">Cato the Younger</div><div class="era">95–46 BCE · Roman Senator</div></div>
+      <div class="voice-card"><div class="day">Day 8 · 6:50</div><div class="name">Friedrich Nietzsche</div><div class="era">1844–1900 · German Philosopher</div></div>
+      <div class="voice-card"><div class="day">Day 9 · 6:35</div><div class="name">Arthur Schopenhauer</div><div class="era">1788–1860 · German Philosopher</div></div>
+      <div class="voice-card"><div class="day">Day 10 · 6:55</div><div class="name">Fyodor Dostoevsky</div><div class="era">1821–1881 · Russian Novelist</div></div>
+      <div class="voice-card"><div class="day">Day 11 · 6:30</div><div class="name">James Stockdale</div><div class="era">1923–2005 · US Navy Vice Admiral</div></div>
+      <div class="voice-card"><div class="day">Day 12 · 6:25</div><div class="name">Socrates</div><div class="era">c. 470–399 BCE · Athenian Philosopher</div></div>
+      <div class="voice-card"><div class="day">Day 13 · 6:30</div><div class="name">Heraclitus</div><div class="era">c. 535–475 BCE · Pre-Socratic</div></div>
+      <div class="voice-card"><div class="day">Day 14 · 6:30</div><div class="name">Laozi</div><div class="era">c. 6th–4th c. BCE · Daoist Sage</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Pricing ===== -->
+<section class="block" id="pricing">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">One price. All three voices.</h2>
+    <p class="section-sub">No subscription, no expiration, no upsell. Pay once, download all three narrations, listen on any device, return any time.</p>
+
+    <div class="pricing-card">
+      <div class="price">$10</div>
+      <div class="price-sub">Instant Download</div>
+      <ul>
+        <li>3 chapter-marked M4B audiobooks (one per voice)</li>
+        <li>42 individual MP3 chapters across the three voices</li>
+        <li>98 minutes of audio per voice, 14 chapters each</li>
+        <li>Plays on Apple Books, Audible-compatible players, podcast apps</li>
+      </ul>
+
+      <form class="pricing-form" id="buyForm">
+        <input type="email" name="email" placeholder="Your email, where we will send the files" required autocomplete="email">
+        <button type="submit">Get the audiobook · $10</button>
+      </form>
+      <div class="form-fineprint">Secure checkout via Gumroad · Files delivered to your inbox</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container top-row">
+    <div class="left">
+      <div class="name">14 Days to a Stoic Mind · Audiobook</div>
+      <div class="meta">Published by @stoicismwidget</div>
+    </div>
+    <div class="right">
+      <a href="https://instagram.com/stoicismwidget" target="_blank">Instagram</a>
+      <a href="#listen">Sample</a>
+      <a href="#voices">Masters</a>
+      <a href="#pricing">Buy · $10</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="copyright">© 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ----- Voice picker / sample player -----
+  const tabs = document.querySelectorAll('.voice-tab');
+  const audio = document.getElementById('sampleAudio');
+  const playBtn = document.getElementById('playBtn');
+  const progressBar = document.getElementById('progressBar');
+  const nowMeta = document.getElementById('nowMeta');
+
+  function setVoice(tab) {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const wasPlaying = !audio.paused;
+    audio.src = tab.dataset.src;
+    nowMeta.textContent = tab.querySelector('.tab-eyebrow').textContent + ' · 30s preview';
+    progressBar.style.width = '0%';
+    if (wasPlaying) {
+      audio.play().catch(() => {});
+    }
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => setVoice(tab)));
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) audio.play();
+    else audio.pause();
+  });
+  audio.addEventListener('play', () => playBtn.classList.add('playing'));
+  audio.addEventListener('pause', () => playBtn.classList.remove('playing'));
+  audio.addEventListener('ended', () => {
+    playBtn.classList.remove('playing');
+    progressBar.style.width = '0%';
+  });
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
+  });
+
+  // ----- Buy form (collects email for delivery) -----
+  // TODO: Wire to Gumroad or Stripe Checkout. For now, capture the email and inform the user.
+  const buyForm = document.getElementById('buyForm');
+  buyForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = buyForm.querySelector('input[type=email]').value.trim();
+    if (!email) return;
+    sessionStorage.setItem('pending_audiobook_buyer_email', email);
+    console.log('[purchase] audiobook buyer email captured:', email);
+    alert('Checkout is not yet wired up. Email saved.');
+  });
+})();
+</script>
+
+</body>
+</html>

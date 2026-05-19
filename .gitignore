@@ -1,0 +1,26 @@
+# Mac
+.DS_Store
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Python (in case scripts get added later)
+.venv/
+__pycache__/
+*.pyc
+
+# Node (in case any tooling gets added)
+node_modules/
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+synth.log
+
+# Temp
+*.tmp

@@ -1,0 +1,258 @@
+{
+  "title": "Stoic Meditations: 14 Days with the Great Thinkers",
+  "author": "Stoic Meditations",
+  "voices": [
+    {
+      "id": "am_michael",
+      "label": "American male (Michael)",
+      "m4b": "am_michael/stoic_meditations.m4b",
+      "m4b_bytes": 48084921,
+      "total_duration_ms": 5880000,
+      "chapters": [
+        {
+          "title": "Introduction: How to Read This Book",
+          "file": "am_michael/chapter_00_intro.mp3",
+          "duration_ms": 120900
+        },
+        {
+          "title": "Day 1: Marcus Aurelius Antoninus",
+          "file": "am_michael/chapter_01.mp3",
+          "duration_ms": 428775
+        },
+        {
+          "title": "Day 2: Lucius Annaeus Seneca",
+          "file": "am_michael/chapter_02.mp3",
+          "duration_ms": 394950
+        },
+        {
+          "title": "Day 3: Confucius (Kongzi)",
+          "file": "am_michael/chapter_03.mp3",
+          "duration_ms": 396025
+        },
+        {
+          "title": "Day 4: Epictetus",
+          "file": "am_michael/chapter_04.mp3",
+          "duration_ms": 402200
+        },
+        {
+          "title": "Day 5: Sun Tzu (Sunzi)",
+          "file": "am_michael/chapter_05.mp3",
+          "duration_ms": 411875
+        },
+        {
+          "title": "Day 6: Miyamoto Musashi",
+          "file": "am_michael/chapter_06.mp3",
+          "duration_ms": 385525
+        },
+        {
+          "title": "Day 7: Marcus Porcius Cato (the Younger)",
+          "file": "am_michael/chapter_07.mp3",
+          "duration_ms": 410275
+        },
+        {
+          "title": "Day 8: Friedrich Nietzsche",
+          "file": "am_michael/chapter_08.mp3",
+          "duration_ms": 405775
+        },
+        {
+          "title": "Day 9: Arthur Schopenhauer",
+          "file": "am_michael/chapter_09.mp3",
+          "duration_ms": 431725
+        },
+        {
+          "title": "Day 10: Fyodor Dostoevsky",
+          "file": "am_michael/chapter_10.mp3",
+          "duration_ms": 438625
+        },
+        {
+          "title": "Day 11: James Bond Stockdale",
+          "file": "am_michael/chapter_11.mp3",
+          "duration_ms": 429875
+        },
+        {
+          "title": "Day 12: Socrates",
+          "file": "am_michael/chapter_12.mp3",
+          "duration_ms": 420550
+        },
+        {
+          "title": "Day 13: Heraclitus of Ephesus",
+          "file": "am_michael/chapter_13.mp3",
+          "duration_ms": 397850
+        },
+        {
+          "title": "Day 14: Laozi",
+          "file": "am_michael/chapter_14.mp3",
+          "duration_ms": 405075
+        }
+      ]
+    },
+    {
+      "id": "af_heart",
+      "label": "American female (Heart)",
+      "m4b": "af_heart/stoic_meditations.m4b",
+      "m4b_bytes": 43996208,
+      "total_duration_ms": 5393075,
+      "chapters": [
+        {
+          "title": "Introduction: How to Read This Book",
+          "file": "af_heart/chapter_00_intro.mp3",
+          "duration_ms": 111150
+        },
+        {
+          "title": "Day 1: Marcus Aurelius Antoninus",
+          "file": "af_heart/chapter_01.mp3",
+          "duration_ms": 392425
+        },
+        {
+          "title": "Day 2: Lucius Annaeus Seneca",
+          "file": "af_heart/chapter_02.mp3",
+          "duration_ms": 362175
+        },
+        {
+          "title": "Day 3: Confucius (Kongzi)",
+          "file": "af_heart/chapter_03.mp3",
+          "duration_ms": 364775
+        },
+        {
+          "title": "Day 4: Epictetus",
+          "file": "af_heart/chapter_04.mp3",
+          "duration_ms": 368550
+        },
+        {
+          "title": "Day 5: Sun Tzu (Sunzi)",
+          "file": "af_heart/chapter_05.mp3",
+          "duration_ms": 377000
+        },
+        {
+          "title": "Day 6: Miyamoto Musashi",
+          "file": "af_heart/chapter_06.mp3",
+          "duration_ms": 352475
+        },
+        {
+          "title": "Day 7: Marcus Porcius Cato (the Younger)",
+          "file": "af_heart/chapter_07.mp3",
+          "duration_ms": 376450
+        },
+        {
+          "title": "Day 8: Friedrich Nietzsche",
+          "file": "af_heart/chapter_08.mp3",
+          "duration_ms": 371275
+        },
+        {
+          "title": "Day 9: Arthur Schopenhauer",
+          "file": "af_heart/chapter_09.mp3",
+          "duration_ms": 396250
+        },
+        {
+          "title": "Day 10: Fyodor Dostoevsky",
+          "file": "af_heart/chapter_10.mp3",
+          "duration_ms": 403075
+        },
+        {
+          "title": "Day 11: James Bond Stockdale",
+          "file": "af_heart/chapter_11.mp3",
+          "duration_ms": 393100
+        },
+        {
+          "title": "Day 12: Socrates",
+          "file": "af_heart/chapter_12.mp3",
+          "duration_ms": 385100
+        },
+        {
+          "title": "Day 13: Heraclitus of Ephesus",
+          "file": "af_heart/chapter_13.mp3",
+          "duration_ms": 365225
+        },
+        {
+          "title": "Day 14: Laozi",
+          "file": "af_heart/chapter_14.mp3",
+          "duration_ms": 374050
+        }
+      ]
+    },
+    {
+      "id": "bm_george",
+      "label": "British male (George)",
+      "m4b": "bm_george/stoic_meditations.m4b",
+      "m4b_bytes": 45246041,
+      "total_duration_ms": 5602200,
+      "chapters": [
+        {
+          "title": "Introduction: How to Read This Book",
+          "file": "bm_george/chapter_00_intro.mp3",
+          "duration_ms": 115875
+        },
+        {
+          "title": "Day 1: Marcus Aurelius Antoninus",
+          "file": "bm_george/chapter_01.mp3",
+          "duration_ms": 404475
+        },
+        {
+          "title": "Day 2: Lucius Annaeus Seneca",
+          "file": "bm_george/chapter_02.mp3",
+          "duration_ms": 374900
+        },
+        {
+          "title": "Day 3: Confucius (Kongzi)",
+          "file": "bm_george/chapter_03.mp3",
+          "duration_ms": 379875
+        },
+        {
+          "title": "Day 4: Epictetus",
+          "file": "bm_george/chapter_04.mp3",
+          "duration_ms": 385375
+        },
+        {
+          "title": "Day 5: Sun Tzu (Sunzi)",
+          "file": "bm_george/chapter_05.mp3",
+          "duration_ms": 390600
+        },
+        {
+          "title": "Day 6: Miyamoto Musashi",
+          "file": "bm_george/chapter_06.mp3",
+          "duration_ms": 365500
+        },
+        {
+          "title": "Day 7: Marcus Porcius Cato (the Younger)",
+          "file": "bm_george/chapter_07.mp3",
+          "duration_ms": 393575
+        },
+        {
+          "title": "Day 8: Friedrich Nietzsche",
+          "file": "bm_george/chapter_08.mp3",
+          "duration_ms": 387825
+        },
+        {
+          "title": "Day 9: Arthur Schopenhauer",
+          "file": "bm_george/chapter_09.mp3",
+          "duration_ms": 412400
+        },
+        {
+          "title": "Day 10: Fyodor Dostoevsky",
+          "file": "bm_george/chapter_10.mp3",
+          "duration_ms": 418025
+        },
+        {
+          "title": "Day 11: James Bond Stockdale",
+          "file": "bm_george/chapter_11.mp3",
+          "duration_ms": 407350
+        },
+        {
+          "title": "Day 12: Socrates",
+          "file": "bm_george/chapter_12.mp3",
+          "duration_ms": 398050
+        },
+        {
+          "title": "Day 13: Heraclitus of Ephesus",
+          "file": "bm_george/chapter_13.mp3",
+          "duration_ms": 378875
+        },
+        {
+          "title": "Day 14: Laozi",
+          "file": "bm_george/chapter_14.mp3",
+          "duration_ms": 389500
+        }
+      ]
+    }
+  ]
+}

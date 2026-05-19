@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 Days to a Stoic Mind · Daily Wisdom from Fourteen Masters</title>
+<meta name="description" content="A 14-day reader. One master a day, three pages a sitting. Marcus Aurelius, Seneca, Sun Tzu, Epictetus, Musashi, and nine more, with every quote verified to its primary source.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #ede5d3;
+  --ink: #1c1a17;
+  --rule: #c8bda7;
+  --accent: #6b4d2a;
+  --gold: #c9a253;
+  --muted: #75695b;
+  --dotted: #d8cdb8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* ------- Email popup (fires once, on first visit) ------- */
+.email-popup {
+  position: fixed; inset: 0;
+  background: rgba(12, 10, 8, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100; padding: 1rem;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0s 0.35s;
+}
+.email-popup.visible {
+  opacity: 1; visibility: visible;
+  transition: opacity 0.35s ease;
+}
+.popup-card {
+  background: var(--paper); padding: 3rem 2.5rem 2.5rem;
+  max-width: 460px; width: 100%;
+  border-radius: 4px; text-align: center; position: relative;
+  box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5);
+  transform: translateY(24px); transition: transform 0.35s ease;
+}
+.email-popup.visible .popup-card { transform: translateY(0); }
+.popup-close {
+  position: absolute; top: 0.75rem; right: 1rem;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.6rem; color: var(--muted); line-height: 1;
+  padding: 0.25rem 0.5rem;
+}
+.popup-close:hover { color: var(--ink); }
+.popup-eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1rem; font-weight: 500;
+}
+.popup-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem; font-weight: 500;
+  line-height: 1.18; margin-bottom: 0.8rem;
+}
+.popup-body {
+  color: var(--muted); font-size: 1rem;
+  margin-bottom: 1.75rem; line-height: 1.55;
+}
+.popup-form { display: flex; flex-direction: column; gap: 0.6rem; }
+.popup-form input {
+  padding: 0.95rem 1rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+  background: white; border: 1px solid var(--rule);
+  border-radius: 2px; outline: none;
+  transition: border-color 0.15s ease;
+}
+.popup-form input:focus { border-color: var(--accent); }
+.popup-form button {
+  padding: 0.95rem 1rem; background: var(--ink); color: var(--paper);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: none; border-radius: 2px; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.popup-form button:hover { background: var(--accent); }
+.popup-fineprint {
+  margin-top: 1rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  color: var(--muted); text-transform: uppercase;
+}
+.popup-thanks { display: none; }
+.popup-card.submitted .popup-form,
+.popup-card.submitted .popup-body,
+.popup-card.submitted .popup-eyebrow,
+.popup-card.submitted .popup-title { display: none; }
+.popup-card.submitted .popup-thanks { display: block; }
+.popup-thanks .check {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* ------- Sticky top nav ------- */
+nav.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(246, 241, 231, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.9rem 0;
+}
+nav.top .container { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+nav.top .wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 500; letter-spacing: 0.01em;
+}
+nav.top .right { display: flex; gap: 1.5rem; align-items: center; }
+nav.top a {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; font-weight: 500;
+}
+nav.top a:hover { color: var(--accent); }
+nav.top .buy {
+  background: var(--ink); color: var(--paper);
+  padding: 0.5rem 1rem; border-radius: 2px;
+}
+nav.top .buy:hover { color: var(--paper); background: var(--accent); }
+
+/* ------- Hero ------- */
+.hero { padding: 4.5rem 0 6rem; }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1.15fr;
+  gap: 4rem; align-items: center;
+}
+
+/* Book showcase — the cover fills the box edge-to-edge */
+.book-showcase {
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -25px rgba(0,0,0,0.45);
+  aspect-ratio: 2 / 3;
+}
+.cover-image {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ------- Hero copy ------- */
+.hero-copy { padding-left: 1rem; }
+.hero-copy .eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  font-weight: 500; margin-bottom: 1.5rem;
+}
+.hero-copy h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.4rem; font-weight: 500; line-height: 1.04;
+  margin-bottom: 1.5rem; letter-spacing: -0.01em;
+}
+.hero-copy .hook {
+  font-size: 1.2rem; line-height: 1.55;
+  color: var(--ink); margin-bottom: 2.5rem; max-width: 500px;
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-bottom: 2.5rem; padding: 1.25rem 0;
+  border-top: 1px solid var(--dotted);
+  border-bottom: 1px solid var(--dotted);
+}
+.hero-meta .stat .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 500; line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.hero-meta .stat .label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+.cta-row { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--ink); color: var(--paper);
+  padding: 1.05rem 2.25rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 0.75rem;
+  transition: background 0.18s ease, transform 0.12s ease;
+  border-radius: 2px;
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-primary .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-weight: 500; opacity: 0.85;
+  letter-spacing: 0.01em; text-transform: none;
+}
+.btn-secondary {
+  color: var(--ink); background: transparent;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+.btn-secondary:hover { color: var(--accent); }
+
+/* ------- Section frame ------- */
+section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
+.section-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--muted);
+  text-align: center; margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 500; line-height: 1.15;
+  text-align: center; margin-bottom: 1rem;
+  letter-spacing: -0.005em;
+}
+.section-sub {
+  text-align: center; color: var(--muted);
+  font-size: 1.05rem; max-width: 600px;
+  margin: 0 auto 3.5rem;
+}
+
+/* ------- Voices grid ------- */
+.voices-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
+}
+.voice-card {
+  background: var(--paper); padding: 1.6rem 1.5rem;
+  display: flex; flex-direction: column;
+  transition: background 0.18s ease;
+}
+.voice-card:hover { background: var(--paper-deep); }
+.voice-card .day {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5rem; font-weight: 500;
+}
+.voice-card .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 500;
+  margin-bottom: 0.2rem; line-height: 1.15;
+}
+.voice-card .era {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: var(--muted);
+  margin-bottom: 0.75rem; letter-spacing: 0.04em;
+}
+.voice-card .blurb {
+  font-size: 0.95rem; color: var(--ink); line-height: 1.5;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ------- Sample page ------- */
+.sample-page {
+  background: var(--paper-deep);
+  padding: 4rem 3rem 3rem;
+  border: 1px solid var(--rule);
+  max-width: 640px; margin: 0 auto;
+  box-shadow: 0 30px 80px -30px rgba(28, 26, 23, 0.25);
+  position: relative; overflow: hidden;
+}
+.sample-page .day-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  text-align: center; margin-bottom: 0.75rem; font-weight: 500;
+}
+.sample-page .roman {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.3rem;
+  color: var(--accent); text-align: center;
+  margin-bottom: 2.5rem; letter-spacing: 0.1em;
+}
+.sample-page blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.2rem; line-height: 1.5;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  border-left: 2px solid var(--accent);
+  margin: 0 0 1.5rem;
+}
+.sample-page blockquote p:last-child {
+  font-style: normal; font-size: 0.9rem;
+  color: var(--muted); margin-top: 0.5rem;
+}
+.sample-page p { margin: 0 0 1.1rem; font-size: 1.05rem; line-height: 1.65; }
+.sample-page strong { font-weight: 600; }
+.sample-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ------- Pricing ------- */
+.pricing-card {
+  background: var(--ink); color: var(--paper);
+  padding: 3.5rem 3rem;
+  max-width: 480px; margin: 0 auto;
+  border-radius: 4px; text-align: center;
+  box-shadow: 0 40px 100px -40px rgba(28, 26, 23, 0.45);
+}
+.pricing-card .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem; font-weight: 500; line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.pricing-card .price-sub {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.6;
+  margin-bottom: 2.5rem; font-weight: 500;
+}
+.pricing-card ul {
+  list-style: none; padding: 0; margin: 0 0 2.5rem; text-align: left;
+}
+.pricing-card li {
+  padding: 0.75rem 0; font-size: 1rem;
+  border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+  font-family: 'Cormorant Garamond', serif;
+  display: flex; align-items: baseline; gap: 0.75rem;
+}
+.pricing-card li:last-child { border-bottom: none; }
+.pricing-card li::before {
+  content: '·'; color: var(--gold);
+  font-size: 1.5rem; line-height: 1; opacity: 0.8;
+}
+.pricing-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.pricing-form input {
+  padding: 1rem;
+  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+  background: rgba(246, 241, 231, 0.08);
+  border: 1px solid rgba(246, 241, 231, 0.18);
+  border-radius: 2px; outline: none;
+  color: var(--paper);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pricing-form input::placeholder { color: rgba(246, 241, 231, 0.4); }
+.pricing-form input:focus {
+  border-color: var(--gold); background: rgba(246, 241, 231, 0.12);
+}
+.pricing-form button {
+  background: var(--paper); color: var(--ink);
+  padding: 1.1rem 2rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  border: none; cursor: pointer; border-radius: 2px;
+  transition: background 0.18s ease;
+}
+.pricing-form button:hover { background: var(--gold); color: var(--ink); }
+.pricing-card .form-fineprint {
+  margin-top: 1rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.5;
+}
+
+/* ------- Footer ------- */
+footer {
+  background: var(--ink); color: var(--paper);
+  padding: 4rem 0 2.5rem; margin-top: 0;
+}
+footer .container.top-row {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; flex-wrap: wrap; gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+}
+footer .left .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 500;
+}
+footer .left .meta {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem; color: rgba(246, 241, 231, 0.55);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+footer .right { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+footer .right a {
+  color: var(--paper); text-decoration: none;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.18em;
+  text-transform: uppercase; padding: 0.5rem 1rem;
+  border: 1px solid rgba(246, 241, 231, 0.15);
+  border-radius: 2px; transition: all 0.18s ease;
+}
+footer .right a:hover {
+  background: var(--paper); color: var(--ink);
+  border-color: var(--paper);
+}
+footer .copyright {
+  margin-top: 2rem; text-align: center;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem; color: rgba(246, 241, 231, 0.35);
+  letter-spacing: 0.16em; text-transform: uppercase;
+}
+
+/* ------- Responsive ------- */
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .book-showcase { max-width: 320px; margin: 0 auto; }
+  .hero-copy { padding-left: 0; text-align: center; }
+  .hero-copy h1 { font-size: 2.3rem; }
+  .hero-copy .hook { margin: 0 auto 2rem; }
+  .hero-meta { grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+  .hero-meta .stat .num { font-size: 1.5rem; }
+  .cta-row { justify-content: center; }
+  .voices-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.8rem; }
+  .container { padding: 0 1.25rem; }
+  .hero { padding: 3rem 0 4rem; }
+  section.block { padding: 4rem 0; }
+  .sample-page { padding: 2.5rem 1.5rem 0; }
+  .pricing-card { padding: 2.5rem 1.75rem; }
+  .pricing-card .price { font-size: 3.5rem; }
+  footer .container.top-row { flex-direction: column; align-items: stretch; }
+  nav.top a { font-size: 0.65rem; letter-spacing: 0.14em; }
+  nav.top .wordmark { font-size: 0.9rem; }
+  .popup-card { padding: 2.5rem 1.5rem 2rem; }
+  .popup-title { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Email popup (free lessons lead magnet) ===== -->
+<div class="email-popup" id="emailPopup" role="dialog" aria-labelledby="popupTitle">
+  <div class="popup-card" id="popupCard">
+    <button class="popup-close" id="popupClose" aria-label="Close">×</button>
+    <div class="popup-eyebrow">Before You Read</div>
+    <h2 class="popup-title" id="popupTitle">Five free Stoic lessons, in your inbox.</h2>
+    <p class="popup-body">A short introduction to the practice of Stoicism, drawn from the book. One lesson a day for five days, no spam, unsubscribe any time.</p>
+    <form class="popup-form" id="popupForm">
+      <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+      <button type="submit">Send me the lessons</button>
+    </form>
+    <div class="popup-fineprint">No spam · unsubscribe in one click</div>
+    <div class="popup-thanks">
+      <div class="check">✓</div>
+      <h2 class="popup-title">Lessons are on the way.</h2>
+      <p class="popup-body">Check your inbox in a few minutes. The first lesson lands today.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Top nav ===== -->
+<nav class="top">
+  <div class="container">
+    <div class="wordmark">14 Days to a Stoic Mind</div>
+    <div class="right">
+      <a href="#sample">Sample</a>
+      <a href="#voices">The Masters</a>
+      <a href="https://instagram.com/stoicismwidget" target="_blank">Instagram</a>
+      <a class="buy" href="#pricing">Buy · $9</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <!-- Cover image fills the showcase box edge-to-edge -->
+    <div class="book-showcase" aria-label="Book cover">
+      <img src="cover.jpg" alt="14 Days to a Stoic Mind book cover" class="cover-image">
+    </div>
+
+    <div class="hero-copy">
+      <div class="eyebrow">A Daily Reader · 42 Pages</div>
+      <h1>Two weeks with the strongest minds in history.</h1>
+      <p class="hook">One master a day, for fourteen days. Three short pages each: a quote in its classic translation, what it actually means, and one suggestion for living with it today. Marcus Aurelius, Seneca, Sun Tzu, Epictetus, Musashi, and nine more.</p>
+
+      <div class="hero-meta">
+        <div class="stat"><div class="num">14</div><div class="label">Days</div></div>
+        <div class="stat"><div class="num">14</div><div class="label">Masters</div></div>
+        <div class="stat"><div class="num">42</div><div class="label">Pages</div></div>
+        <div class="stat"><div class="num">10</div><div class="label">Min / Day</div></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn-primary" href="#pricing">Get the book <span class="price">· $9</span></a>
+        <a class="btn-secondary" href="#sample">Read Day 1 free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 14 Voices ===== -->
+<section class="block" id="voices">
+  <div class="container">
+    <div class="section-label">Who You Will Meet</div>
+    <h2 class="section-title">Fourteen Voices Across Twenty-Five Centuries</h2>
+    <p class="section-sub">The Stoics anchor the book. The lineup widens out to the masters Stoics have always read alongside themselves: warriors, mystics, exiles, an emperor, a slave, and one modern admiral who carried Epictetus into a Hanoi prison cell.</p>
+
+    <div class="voices-grid">
+      <div class="voice-card"><div class="day">Day 1</div><div class="name">Marcus Aurelius</div><div class="era">121–180 CE · Roman Stoic Emperor</div><div class="blurb">The emperor who kept a private journal of Stoic exercises during a plague and a frontier war, and never meant for anyone to read it.</div></div>
+      <div class="voice-card"><div class="day">Day 2</div><div class="name">Seneca</div><div class="era">c. 4 BCE – 65 CE · Roman Statesman</div><div class="blurb">Turned Stoic ethics into the most readable Latin prose ever written about how to live and how to die.</div></div>
+      <div class="voice-card"><div class="day">Day 3</div><div class="name">Confucius</div><div class="era">551–479 BCE · Chinese Sage</div><div class="blurb">The wandering teacher whose recorded conversations became the operating system of East Asian moral life for twenty-five centuries.</div></div>
+      <div class="voice-card"><div class="day">Day 4</div><div class="name">Epictetus</div><div class="era">c. 50–135 CE · Greek Stoic Teacher</div><div class="blurb">The freed slave whose handbook on the dichotomy of control became Stoicism's most portable weapon.</div></div>
+      <div class="voice-card"><div class="day">Day 5</div><div class="name">Sun Tzu</div><div class="era">c. 5th c. BCE · Chinese Strategist</div><div class="blurb">The general whose treatise on strategy has been read by every serious commander for two and a half millennia.</div></div>
+      <div class="voice-card"><div class="day">Day 6</div><div class="name">Miyamoto Musashi</div><div class="era">1584–1645 · Japanese Kensei</div><div class="blurb">The undefeated swordsman who spent the last year of his life alone in a cave writing down the way of strategy.</div></div>
+      <div class="voice-card"><div class="day">Day 7</div><div class="name">Cato the Younger</div><div class="era">95–46 BCE · Roman Senator</div><div class="blurb">The senator who walked the Stoic walk into civil war and chose death over submission to Caesar.</div></div>
+      <div class="voice-card"><div class="day">Day 8</div><div class="name">Friedrich Nietzsche</div><div class="era">1844–1900 · German Philosopher</div><div class="blurb">The philologist-turned-philosopher who attacked herd morality, demanded self-overcoming, and was misread by everyone for a century.</div></div>
+      <div class="voice-card"><div class="day">Day 9</div><div class="name">Arthur Schopenhauer</div><div class="era">1788–1860 · German Philosopher</div><div class="blurb">Held that reality is blind striving will, that life is suffering by design, and that the honest response is compassion and self-discipline.</div></div>
+      <div class="voice-card"><div class="day">Day 10</div><div class="name">Fyodor Dostoevsky</div><div class="era">1821–1881 · Russian Novelist</div><div class="blurb">The novelist who treated suffering, faith, freedom, and doubt as the central problems a human being can have.</div></div>
+      <div class="voice-card"><div class="day">Day 11</div><div class="name">James Stockdale</div><div class="era">1923–2005 · US Navy Vice Admiral</div><div class="blurb">Carried Epictetus into a North Vietnamese prison and credited the Enchiridion with keeping him whole for seven and a half years.</div></div>
+      <div class="voice-card"><div class="day">Day 12</div><div class="name">Socrates</div><div class="era">c. 470–399 BCE · Athenian Philosopher</div><div class="blurb">The Athenian who wrote nothing, asked the questions that broke the city's complacency, and drank hemlock rather than stop.</div></div>
+      <div class="voice-card"><div class="day">Day 13</div><div class="name">Heraclitus</div><div class="era">c. 535–475 BCE · Pre-Socratic</div><div class="blurb">The pre-Socratic who wrote one book of dense oracular fragments about fire, flux, and the hidden logos that orders the world.</div></div>
+      <div class="voice-card"><div class="day">Day 14</div><div class="name">Laozi</div><div class="era">c. 6th–4th c. BCE · Daoist Sage</div><div class="blurb">The half-legendary sage whose 81 short chapters on the Way teach that the soft overcomes the hard and the wise act by not forcing.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Sample page ===== -->
+<section class="block" id="sample">
+  <div class="container">
+    <div class="section-label">Inside the Book</div>
+    <h2 class="section-title">The First Page, in Full</h2>
+    <p class="section-sub">Every page has the same shape: an archaic-translation quote, a one-sentence modern paraphrase, a short essay, and a Try-this suggestion. Three of these per master. Forty-two in all.</p>
+
+    <div class="sample-page">
+      <div class="day-label">Day 1 · Marcus Aurelius</div>
+      <div class="roman">— I —</div>
+      <blockquote>
+        <p>Look within. Within is the fountain of good, and it will ever bubble up, if thou wilt ever dig.</p>
+        <p>Marcus Aurelius, Meditations 7.59 (trans. George Long, 1862)</p>
+      </blockquote>
+
+      <p><strong>In plain English:</strong> Whatever calm, courage, or clarity you need today is already inside you. The work is not to wait for it. The work is to dig past the noise.</p>
+
+      <p>Marcus is making a concrete claim, easy to miss in the older language. The good he names is not a feeling and not a mood. It is the working set of inner resources a serious adult uses to get through a day: the ability to think clearly under pressure, to choose your response, to refuse what would diminish you, to act well when no one is watching. These are not handed out by status, wealth, or luck. They come standard with being human. Most people never use them, because they have been trained to look outside themselves for the same goods.</p>
+
+      <p>Marcus is writing this between dispatches on the Danube frontier. He is the emperor of the known world. He has armies, scribes, gold, and the obedience of millions. If anything could be arranged externally, he could arrange it. None of it produced the steadiness he needed. He writes the line to himself, in private, because the answer was not out there for him either, and is not out there for the rest of us.</p>
+
+      <p>The dig is small and daily. A few quiet minutes before reaching for the phone. One honest sentence in a notebook before the day starts pulling at you. One pause before the reactive sentence leaves your mouth. Repeated over weeks, it produces a person who can meet the day from inside rather than chase it from outside. The water comes up if you let it.</p>
+
+      <p><strong>Try this:</strong> Some possibilities: take five quiet minutes today before opening your phone, and notice what surfaces in the space. Or pick one inner resource (patience, focus, courage) you usually try to import from outside, and watch this week for the moments it shows up in you on its own.</p>
+    </div>
+
+    <div class="sample-cta">
+      <a class="btn-secondary" href="./preview.html" target="_blank">Open the full live preview →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Pricing (with buyer email capture) ===== -->
+<section class="block" id="pricing">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">One price. Yours forever.</h2>
+    <p class="section-sub">No subscription, no expiration, no upsell. Pay once, read on any device, return any time.</p>
+
+    <div class="pricing-card">
+      <div class="price">$9</div>
+      <div class="price-sub">Instant Download</div>
+      <ul>
+        <li>The complete 14-day reader, PDF and EPUB</li>
+        <li>42 pages, carefully typeset in serif</li>
+        <li>Every quote verified to its primary source</li>
+        <li>Reads cleanly on Kindle, iPad, iPhone, desktop</li>
+      </ul>
+
+      <form class="pricing-form" id="buyForm">
+        <input type="email" name="email" placeholder="Your email, where we will send the book" required autocomplete="email">
+        <button type="submit">Get the book · $9</button>
+      </form>
+      <div class="form-fineprint">Secure checkout via Gumroad · PDF + EPUB delivered to your inbox</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container top-row">
+    <div class="left">
+      <div class="name">14 Days to a Stoic Mind</div>
+      <div class="meta">Published by @stoicismwidget</div>
+    </div>
+    <div class="right">
+      <a href="https://instagram.com/stoicismwidget" target="_blank">Instagram</a>
+      <a href="#sample">Sample</a>
+      <a href="#voices">Masters</a>
+      <a href="#pricing">Buy · $9</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="copyright">© 2026 · All rights reserved</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // === Kit (ConvertKit) form ID === see docs/kit-setup.md
+  const KIT_FORM_ID = 'REPLACE_WITH_KIT_FORM_ID';
+
+  // ----- Email popup (fires once per visitor, 4s after load) -----
+  const POPUP_KEY = 'stoic_book_popup_v1';
+  const popup = document.getElementById('emailPopup');
+  const popupCard = document.getElementById('popupCard');
+  const popupForm = document.getElementById('popupForm');
+  const popupClose = document.getElementById('popupClose');
+
+  function showPopup() { popup.classList.add('visible'); }
+  function hidePopup() {
+    popup.classList.remove('visible');
+    if (!localStorage.getItem(POPUP_KEY)) {
+      localStorage.setItem(POPUP_KEY, 'dismissed');
+    }
+  }
+
+  if (!localStorage.getItem(POPUP_KEY)) {
+    setTimeout(showPopup, 4000);
+  }
+
+  popupClose.addEventListener('click', hidePopup);
+  popup.addEventListener('click', function (e) {
+    if (e.target === popup) hidePopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && popup.classList.contains('visible')) hidePopup();
+  });
+  popupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = popupForm.querySelector('input[type=email]').value.trim();
+    if (!email) return;
+    localStorage.setItem(POPUP_KEY, 'subscribed:' + email);
+    popupCard.classList.add('submitted');
+    setTimeout(function () { popup.classList.remove('visible'); }, 2400);
+
+    if (KIT_FORM_ID && KIT_FORM_ID !== 'REPLACE_WITH_KIT_FORM_ID') {
+      fetch('https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email_address: email })
+      }).catch(function () { /* swallow */ });
+    } else {
+      console.warn('[Kit] KIT_FORM_ID not configured. Popup email captured locally only:', email);
+    }
+  });
+
+  // ----- Buy form (collects email for PDF delivery) -----
+  // TODO: Wire to Gumroad or Stripe Checkout (see README "Known TODOs"). For now, redirects to the
+  // homepage with the email pre-staged in sessionStorage so we don't lose the lead.
+  const buyForm = document.getElementById('buyForm');
+  buyForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = buyForm.querySelector('input[type=email]').value.trim();
+    if (!email) return;
+    sessionStorage.setItem('pending_buyer_email', email);
+    console.log('[purchase] buyer email captured:', email);
+    alert('Checkout is not yet wired up. Email saved. Use the popup form to grab the free lessons in the meantime.');
+  });
+})();
+</script>
+
+</body>
+</html>
