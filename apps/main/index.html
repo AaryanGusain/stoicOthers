@@ -240,6 +240,52 @@ body {
 }
 .thanks p { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
 
+/* ===== Bundle offer modal (shown after email signup) ===== */
+.offer-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(20, 16, 10, 0.62);
+  z-index: 9000;
+  align-items: center; justify-content: center;
+  padding: 1.2rem;
+  animation: offer-fade .25s ease-out;
+}
+.offer-overlay.visible { display: flex; }
+@keyframes offer-fade { from { opacity: 0 } to { opacity: 1 } }
+.offer-card {
+  position: relative;
+  width: min(440px, 100%);
+  background: var(--paper, #f0e9d8);
+  border: 1px solid #b9aa8f;
+  box-shadow: 0 28px 80px -34px rgba(0,0,0,.55);
+  padding: 1.6rem 1.4rem 1.35rem;
+  color: #1c1a17;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  text-align: center;
+}
+.offer-card .corner { position: absolute; width: 18px; height: 18px; border-color: #8f754d; }
+.offer-card .corner.tl { top: 10px; left: 10px; border-top: 1px solid; border-left: 1px solid; }
+.offer-card .corner.br { right: 10px; bottom: 10px; border-right: 1px solid; border-bottom: 1px solid; }
+.offer-card .eyebrow { font-family: 'Inter Tight', sans-serif; font-size: 0.64rem; letter-spacing: 0.22em; color: var(--gold, #c9a253); text-transform: uppercase; margin-bottom: .55rem; }
+.offer-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; line-height: 1.15; font-weight: 500; margin: 0 0 .55rem; }
+.offer-card .lede { color: #5e5144; font-size: .98rem; line-height: 1.45; margin: 0 0 1rem; font-family: Georgia, serif; }
+.offer-card .price-row { display: flex; align-items: baseline; justify-content: center; gap: .5rem; margin: 0 0 1rem; font-family: 'Cormorant Garamond', serif; }
+.offer-card .price { font-size: 2.1rem; font-weight: 500; }
+.offer-card .price small { font-size: .9rem; color: #75695b; font-family: 'Inter Tight', sans-serif; letter-spacing: .08em; text-transform: uppercase; margin-left: .25rem; }
+.offer-card .includes { font-family: Georgia, serif; font-size: .88rem; color: #5e5144; line-height: 1.55; margin: 0 0 1.1rem; }
+.offer-card .includes b { color: #1c1a17; font-weight: 600; }
+.offer-card .cta { display: inline-block; width: 100%; padding: .95rem 1rem; background: #1c1a17; color: #f6f1e7; text-decoration: none; text-transform: uppercase; letter-spacing: .18em; font: 600 .72rem 'Inter Tight', Arial, sans-serif; cursor: pointer; border: 1px solid #1c1a17; }
+.offer-card .cta:hover { background: var(--gold, #c9a253); color: #1c1a17; }
+.offer-card .dismiss { display: block; margin-top: .8rem; background: none; border: none; color: #75695b; font-family: 'Inter Tight', sans-serif; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+.offer-card .dismiss:hover { color: #1c1a17; }
+.offer-card .close-x { position: absolute; top: 8px; right: 12px; background: none; border: none; color: #75695b; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+.offer-card .close-x:hover { color: #1c1a17; }
+@media (max-width: 540px) {
+  .offer-card { padding: 1.4rem 1.1rem 1.15rem; }
+  .offer-card h2 { font-size: 1.4rem; }
+  .offer-card .price { font-size: 1.85rem; }
+}
+
 /* ===== Resource cards (right) ===== */
 .cards {
   display: flex; flex-direction: column;
@@ -506,13 +552,61 @@ footer .dot { opacity: 0.5; }
 
 </main>
 
+<!-- Bundle offer modal — shown once, immediately after the email signup succeeds -->
+<div class="offer-overlay" id="bundleOffer" role="dialog" aria-modal="true" aria-labelledby="bundleOfferTitle" hidden>
+  <div class="offer-card">
+    <span class="corner tl" aria-hidden="true"></span>
+    <span class="corner br" aria-hidden="true"></span>
+    <button type="button" class="close-x" id="bundleOfferClose" aria-label="Dismiss">×</button>
+    <div class="eyebrow">One-time offer</div>
+    <h2 id="bundleOfferTitle">Go further than five lessons.</h2>
+    <p class="lede">Since you're starting the practice — here is everything we make, in one pack.</p>
+    <div class="price-row">
+      <span class="price">$20<small>USD</small></span>
+    </div>
+    <p class="includes">
+      <b>14 Days to a Stoic Mind</b> · ebook PDF<br>
+      <b>The full audiobook</b> · all three narrator voices<br>
+      <b>Three wallpaper bundles</b> · 60 phone wallpapers
+    </p>
+    <a class="cta" href="/bundle">Get the Complete Pack →</a>
+    <button type="button" class="dismiss" id="bundleOfferDismiss">No thanks, just the lessons</button>
+  </div>
+</div>
+
 <script>
 (function () {
   const SUB_KEY = 'sm_main_subscribe_v1';
+  const OFFER_KEY = 'sm_bundle_offer_seen_v1';
   const subSection = document.getElementById('subscribe');
   const subForm = document.getElementById('subscribeForm');
   const scrollLink = document.getElementById('scrollToSubscribe');
   const emailInput = subForm.querySelector('input[type=email]');
+  const offerOverlay = document.getElementById('bundleOffer');
+
+  function showBundleOffer() {
+    if (!offerOverlay || localStorage.getItem(OFFER_KEY)) return;
+    offerOverlay.hidden = false;
+    offerOverlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+  function hideBundleOffer() {
+    if (!offerOverlay) return;
+    offerOverlay.classList.remove('visible');
+    offerOverlay.hidden = true;
+    document.body.style.overflow = '';
+    localStorage.setItem(OFFER_KEY, '1');
+  }
+  if (offerOverlay) {
+    document.getElementById('bundleOfferClose').addEventListener('click', hideBundleOffer);
+    document.getElementById('bundleOfferDismiss').addEventListener('click', hideBundleOffer);
+    offerOverlay.addEventListener('click', function (e) {
+      if (e.target === offerOverlay) hideBundleOffer();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && offerOverlay.classList.contains('visible')) hideBundleOffer();
+    });
+  }
 
   if (localStorage.getItem(SUB_KEY)) {
     subSection.classList.add('submitted');
@@ -536,6 +630,7 @@ footer .dot { opacity: 0.5; }
         if (!response.ok) throw new Error('Could not send lessons');
         localStorage.setItem(SUB_KEY, 'subscribed:' + email);
         subSection.classList.add('submitted');
+        setTimeout(showBundleOffer, 700);
       })
       .catch(function () {
         alert('The lessons could not be sent right now. Please try again in a minute.');
