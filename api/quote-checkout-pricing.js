@@ -32,9 +32,10 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 400, { error: 'declared_country must be an ISO 2-letter country code' });
   }
 
+  const useInr = declaredCountry === 'IN';
   const pricing = computeCheckoutPricing({
-    baseAmount: product.usdAmount,
-    currency: 'USD',
+    baseAmount: useInr ? product.inrAmount : product.usdAmount,
+    currency: useInr ? 'INR' : 'USD',
     declaredCountry
   });
 

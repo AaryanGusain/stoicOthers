@@ -107,11 +107,16 @@ module.exports = async function handler(req, res) {
       }
     });
 
-    const usdPricing = computeCheckoutPricing({
-      baseAmount: product.usdAmount,
-      currency: 'USD',
+    const useInr = declaredCountry === 'IN';
+    const primaryCurrency = useInr ? 'INR' : 'USD';
+    const primaryPricing = computeCheckoutPricing({
+      baseAmount: useInr ? product.inrAmount : product.usdAmount,
+      currency: primaryCurrency,
       declaredCountry
     });
+    const primaryListedPrice = useInr
+      ? (product.inrAmount / 100).toFixed(2)
+      : product.listedPrice;
 
     const localOrder = await prisma.digitalOrder.create({
       data: {
@@ -125,19 +130,19 @@ module.exports = async function handler(req, res) {
         ipAddress,
         ipCountry,
         countryMismatch,
-        currency: 'USD',
-        displayCurrency: 'USD',
-        listedPrice: product.listedPrice,
-        grossAmount: usdPricing.finalAmount,
-        taxAmountIfAny: usdPricing.adjustmentAmount,
+        currency: primaryCurrency,
+        displayCurrency: primaryCurrency,
+        listedPrice: primaryListedPrice,
+        grossAmount: primaryPricing.finalAmount,
+        taxAmountIfAny: primaryPricing.adjustmentAmount,
         discountAmount: product.discountAmount || 0,
-        netAmountEstimated: usdPricing.baseAmount,
+        netAmountEstimated: primaryPricing.baseAmount,
         status: 'created',
         notesJson: {
           product_description: product.description,
           marketing_source: cleanString(body.marketing_source, 240),
-          checkout_currency_preference: 'USD',
-          pricing_breakdown: usdPricing.breakdown
+          checkout_currency_preference: primaryCurrency,
+          pricing_breakdown: primaryPricing.breakdown
         },
         referrer,
         userAgent,
@@ -154,9 +159,10 @@ module.exports = async function handler(req, res) {
       gatewayOrder = await createGatewayOrder({
         localOrder,
         product,
-        pricing: usdPricing
+        pricing: primaryPricing
       });
     } catch (error) {
+      if (useInr) throw error;
       currencyFallback = error && error.message ? error.message : 'USD order creation failed';
       const inrPricing = computeCheckoutPricing({
         baseAmount: product.inrAmount,
@@ -205,7 +211,7 @@ module.exports = async function handler(req, res) {
       customer_name: customerName,
       pricing_breakdown: finalOrder.notesJson && finalOrder.notesJson.pricing_breakdown
         ? finalOrder.notesJson.pricing_breakdown
-        : usdPricing.breakdown,
+        : primaryPricing.breakdown,
       currency_fallback: currencyFallback,
       checkout: {
         name: 'Stoic Meditations',
