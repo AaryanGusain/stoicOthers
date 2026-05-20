@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "prisma generate",
+    "build": "prisma migrate deploy && prisma generate",
     "postinstall": "prisma generate",
     "generate:book-pdf": "node scripts/generate-book-pdf.js",
     "db:generate": "prisma generate",

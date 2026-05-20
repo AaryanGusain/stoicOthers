@@ -1,6 +1,51 @@
 const fs = require('fs');
 const path = require('path');
-const { readJson, sendJson } = require('./_http');
+const { readJson, sendJson, getClientIp } = require('./_http');
+const { prisma } = require('./_prisma');
+
+function cleanString(value, max = 500) {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed ? trimmed.slice(0, max) : null;
+}
+
+async function recordSubscriber(email, req, body) {
+  const ipCountryHeader = req.headers['x-vercel-ip-country'];
+  const ipCountry = typeof ipCountryHeader === 'string' && ipCountryHeader.length === 2
+    ? ipCountryHeader.toUpperCase()
+    : null;
+  const now = new Date();
+
+  const baseFields = {
+    source: cleanString(body.source, 80) || 'main_home_signup',
+    ipCountry,
+    ipAddress: getClientIp(req),
+    userAgent: cleanString(req.headers['user-agent'], 1000),
+    referrer: cleanString(body.referrer || req.headers.referer, 1000),
+    utmSource: cleanString(body.utm_source, 160),
+    utmMedium: cleanString(body.utm_medium, 160),
+    utmCampaign: cleanString(body.utm_campaign, 240),
+    utmContent: cleanString(body.utm_content, 240),
+    utmTerm: cleanString(body.utm_term, 240),
+    lessonsSentAt: now
+  };
+
+  try {
+    await prisma.subscriber.upsert({
+      where: { email },
+      update: {
+        ...baseFields,
+        signupCount: { increment: 1 }
+      },
+      create: {
+        email,
+        ...baseFields
+      }
+    });
+  } catch (error) {
+    console.error('subscribe-lessons: failed to persist subscriber', error && error.message);
+  }
+}
 
 function cleanEmail(value) {
   return typeof value === 'string' ? value.trim().toLowerCase() : '';
@@ -179,6 +224,7 @@ module.exports = async function handler(req, res) {
   try {
     const lessons = loadLessons();
     await sendLessonsEmail(email, lessons);
+    await recordSubscriber(email, req, body);
     return sendJson(res, 200, { ok: true, sent: 1, lessons: lessons.length });
   } catch (error) {
     return sendJson(res, 502, {
