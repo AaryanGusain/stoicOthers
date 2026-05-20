@@ -16,24 +16,110 @@ function getDeliverables(productId, origin) {
 
 function buildDeliveryEmail(order, origin) {
   const deliverables = getDeliverables(order.productId, origin);
-  const linksHtml = deliverables
-    .map(item => `<li><a href="${item.url}">${item.label}</a> <span style="color:#75695b">(${item.type})</span></li>`)
+
+  const buttonRows = deliverables
+    .map(item => `
+      <tr>
+        <td style="padding: 8px 0;">
+          <a href="${item.url}"
+             style="display:inline-block; background:#2c2318; color:#f5f0e8; text-decoration:none;
+                    font-family:Georgia,serif; font-size:15px; padding:12px 24px; border-radius:4px;">
+            &#8595; ${item.label}
+            <span style="font-size:12px; opacity:0.65; margin-left:6px;">${item.type}</span>
+          </a>
+        </td>
+      </tr>`)
     .join('');
+
   const linksText = deliverables
-    .map(item => `- ${item.label}: ${item.url}`)
-    .join('\n');
+    .map(item => `  • ${item.label} (${item.type})\n    ${item.url}`)
+    .join('\n\n');
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0; padding:0; background:#f5f0e8;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f0e8; padding: 40px 16px;">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px; width:100%; background:#fffdf8;
+             border-radius:8px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#2c2318; padding:32px 40px; text-align:center;">
+            <p style="margin:0; font-family:Georgia,serif; font-size:13px; letter-spacing:2px;
+                      text-transform:uppercase; color:#c9b99a;">Stoic Meditations</p>
+            <h1 style="margin:12px 0 0; font-family:Georgia,serif; font-weight:400; font-size:26px; color:#f5f0e8;">
+              Your order is ready ✦
+            </h1>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="padding:36px 40px;">
+            <p style="margin:0 0 8px; font-family:Georgia,serif; font-size:17px; color:#1c1a17;">
+              Thank you for your purchase!
+            </p>
+            <p style="margin:0 0 28px; font-family:Georgia,serif; font-size:15px; color:#4a4035; line-height:1.7;">
+              Your copy of <strong>${order.productName}</strong> is ready to download.
+              Click the button${deliverables.length > 1 ? 's' : ''} below — your files will download instantly.
+            </p>
+
+            <!-- Download buttons -->
+            <table cellpadding="0" cellspacing="0" style="width:100%;">
+              ${buttonRows}
+            </table>
+
+            <!-- Divider -->
+            <tr><td style="padding:32px 0 0;">
+              <hr style="border:none; border-top:1px solid #e8e0d4; margin:0;">
+            </td></tr>
+
+            <!-- Stoic quote -->
+            <p style="margin:28px 0 0; font-family:Georgia,serif; font-size:14px; color:#75695b;
+                      font-style:italic; line-height:1.7; text-align:center;">
+              "Confine yourself to the present."<br>
+              <span style="font-size:12px; font-style:normal;">— Marcus Aurelius</span>
+            </p>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#f0e9dd; padding:20px 40px; text-align:center;">
+            <p style="margin:0; font-family:Georgia,serif; font-size:12px; color:#9a8f82; line-height:1.6;">
+              Questions? Just reply to this email — we're happy to help.<br>
+              Order ID: <span style="font-family:monospace;">${order.id}</span>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  const text = `Thank you for your purchase!
+
+Your copy of ${order.productName} is ready to download.
+
+${linksText}
+
+──────────────────────────────────────────
+"Confine yourself to the present." — Marcus Aurelius
+──────────────────────────────────────────
+
+Questions? Just reply to this email — we're happy to help.
+Order ID: ${order.id}
+
+Stoic Meditations`;
 
   return {
-    subject: `Your Stoic Meditations download: ${order.productName}`,
-    html: `
-      <div style="font-family: Georgia, serif; color: #1c1a17; line-height: 1.55;">
-        <h1 style="font-weight: 500;">Your download is ready</h1>
-        <p>Thank you for purchasing ${order.productName}. Use the links below to download your files.</p>
-        <ul>${linksHtml}</ul>
-        <p style="color:#75695b">Order ID: ${order.id}</p>
-      </div>
-    `,
-    text: `Your download is ready\n\n${linksText}\n\nOrder ID: ${order.id}`
+    subject: `Your download is ready — ${order.productName}`,
+    html,
+    text
   };
 }
 
