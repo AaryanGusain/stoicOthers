@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stoic Meditations Admin</title>
+<meta name="robots" content="noindex">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap');
+:root { --paper:#f6f1e7; --deep:#e9dfca; --ink:#1c1a17; --muted:#75695b; --rule:#c8bda7; --gold:#9b7435; }
+* { box-sizing:border-box; }
+body { margin:0; max-width:100%; overflow-x:clip; background:radial-gradient(circle at 50% 0%, #f0e9d8, var(--paper) 55%); color:var(--ink); font:18px/1.45 'Cormorant Garamond', Georgia, serif; }
+.home-link { position:fixed; top:.85rem; left:.85rem; z-index:80; width:2.45rem; height:2.45rem; border-radius:999px; display:grid; place-items:center; border:1px solid var(--rule); background:rgba(246,241,231,.88); color:var(--gold); text-decoration:none; box-shadow:0 14px 34px -24px rgba(28,26,23,.55); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); transition:background .16s ease,color .16s ease,border-color .16s ease,transform .12s ease; }
+.home-link:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); transform:translateY(-1px); }
+.home-link svg { width:1.05rem; height:1.05rem; display:block; }
+main { width:min(1180px, calc(100% - 2rem)); margin:0 auto; padding:2rem 0 4rem; animation:enter .45s ease both; }
+@keyframes enter { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+h1, h2 { font-weight:500; margin:0; }
+h1 { font-size:clamp(2rem, 5vw, 4rem); text-align:center; }
+.lede { text-align:center; color:var(--muted); margin:.35rem 0 1.5rem; }
+.login, .card { background:rgba(233,223,202,.72); border:1px solid var(--rule); box-shadow:0 22px 54px -38px rgba(28,26,23,.5); }
+.login { width:min(420px,100%); margin:2rem auto; padding:1rem; display:grid; gap:.7rem; }
+input, button { font:600 .74rem 'Inter Tight', sans-serif; letter-spacing:.14em; text-transform:uppercase; padding:.85rem; border:1px solid var(--rule); }
+input { background:#fbf7ef; color:var(--ink); text-transform:none; letter-spacing:0; font-size:1rem; }
+button, .button { background:var(--ink); color:var(--paper); cursor:pointer; text-align:center; text-decoration:none; border:1px solid var(--ink); }
+.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1rem; }
+.card { padding:1rem; }
+.metric { font-size:2rem; line-height:1; margin-top:.35rem; }
+.label { font:600 .63rem 'Inter Tight', sans-serif; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+.split { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+pre { margin:0; white-space:pre-wrap; color:var(--muted); font-size:.95rem; }
+table { width:100%; border-collapse:collapse; margin-top:1rem; background:rgba(246,241,231,.5); }
+th, td { border-bottom:1px solid rgba(117,105,91,.25); padding:.55rem; text-align:left; vertical-align:top; }
+th { font:600 .62rem 'Inter Tight', sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin:1.5rem 0 1rem; }
+.error { color:#8b2e22; text-align:center; margin-top:.7rem; }
+@media (max-width:900px) { .home-link { top:.55rem; left:.65rem; width:2.15rem; height:2.15rem; } main { width:min(100% - 1.4rem, 1180px); padding-top:3rem; } .grid, .split { grid-template-columns:1fr; } .topbar { align-items:stretch; flex-direction:column; } table { display:block; overflow-x:auto; white-space:nowrap; } }
+</style>
+</head>
+<body>
+<a class="home-link" href="/" aria-label="Back to Stoic Meditations home">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 5l8 6.5"></path>
+    <path d="M6.5 10.5V19h11v-8.5"></path>
+    <path d="M10 19v-5h4v5"></path>
+  </svg>
+</a>
+<main>
+  <h1>Sales Admin</h1>
+  <p class="lede">Razorpay orders, country flags, refunds, exports, and monthly accounting summaries.</p>
+
+  <form class="login" id="loginForm">
+    <input type="password" id="password" placeholder="Admin password" autocomplete="current-password" required>
+    <button type="submit">Load dashboard</button>
+    <div class="error" id="error" hidden></div>
+  </form>
+
+  <section id="dashboard" hidden>
+    <div class="topbar">
+      <h2>Overview</h2>
+      <a class="button" id="exportLink" href="#">Export CSV</a>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="label">Gross sales</div><div class="metric" id="gross">$0.00</div></div>
+      <div class="card"><div class="label">Net estimated</div><div class="metric" id="net">$0.00</div></div>
+      <div class="card"><div class="label">Taxes & processing</div><div class="metric" id="adjustments">$0.00</div></div>
+      <div class="card"><div class="label">Refunds</div><div class="metric" id="refunds">$0.00</div></div>
+      <div class="card"><div class="label">Failed payments</div><div class="metric" id="failed">0</div></div>
+    </div>
+
+    <div class="split">
+      <div class="card"><div class="label">Sales by country</div><pre id="countries"></pre></div>
+      <div class="card"><div class="label">Sales by month</div><pre id="months"></pre></div>
+      <div class="card"><div class="label">India vs international</div><pre id="split"></pre></div>
+      <div class="card"><div class="label">Country mismatch flags</div><div class="metric" id="mismatches">0</div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="label">Monthly summaries</div>
+      <pre id="monthly">Run npm run monthly:summary after month-end.</pre>
+    </div>
+
+    <div class="card">
+      <div class="label">Recent orders</div>
+      <table>
+        <thead><tr><th>Date</th><th>Product</th><th>Email</th><th>Country</th><th>Amount</th><th>Status</th><th>Delivery</th></tr></thead>
+        <tbody id="orders"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('loginForm');
+  var dashboard = document.getElementById('dashboard');
+  var error = document.getElementById('error');
+
+  function money(cents, currency) {
+    return (currency || '$') + (Number(cents || 0) / 100).toFixed(2);
+  }
+
+  function authHeaders() {
+    return { 'x-admin-password': sessionStorage.getItem('stoic_admin_password') || '' };
+  }
+
+  function api(path) {
+    return fetch(path, { headers: authHeaders() }).then(function (response) {
+      return response.json().then(function (data) {
+        if (!response.ok) throw new Error(data.error || 'Admin request failed');
+        return data;
+      });
+    });
+  }
+
+  function renderMap(target, map) {
+    target.textContent = Object.keys(map || {}).sort().map(function (key) {
+      return key + ': ' + money(map[key]);
+    }).join('\n') || 'No data yet';
+  }
+
+  function load() {
+    error.hidden = true;
+    return Promise.all([api('/api/admin/summary'), api('/api/admin/orders'), api('/api/admin/monthly-summary')])
+      .then(function (results) {
+        var summary = results[0];
+        var orders = results[1].orders || [];
+        var summaries = results[2].summaries || [];
+        document.getElementById('gross').textContent = money(summary.totals.gross);
+        document.getElementById('net').textContent = money(summary.totals.net_estimated);
+        document.getElementById('adjustments').textContent = money(summary.totals.checkout_adjustments);
+        document.getElementById('refunds').textContent = money(summary.totals.refunds);
+        document.getElementById('failed').textContent = summary.totals.failed_payments;
+        document.getElementById('mismatches').textContent = summary.totals.country_mismatch_flags;
+        renderMap(document.getElementById('countries'), summary.sales_by_country);
+        renderMap(document.getElementById('months'), summary.sales_by_month);
+        document.getElementById('split').textContent = 'India: ' + summary.split.india_sales + '\nInternational: ' + summary.split.international_sales;
+        document.getElementById('monthly').textContent = summaries.length ? summaries.map(function (item) {
+          return item.month + ': ' + JSON.stringify(item.grossByCurrency || item.gross_by_currency || {});
+        }).join('\n') : 'Run npm run monthly:summary after month-end.';
+        document.getElementById('exportLink').href = '/api/admin/export-sales.csv?password_hint=use-header';
+        document.getElementById('exportLink').onclick = function (event) {
+          event.preventDefault();
+          fetch('/api/admin/export-sales.csv', { headers: authHeaders() })
+            .then(function (response) { return response.blob(); })
+            .then(function (blob) {
+              var url = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = url;
+              a.download = 'stoic-meditations-sales.csv';
+              a.click();
+              URL.revokeObjectURL(url);
+            });
+        };
+
+        document.getElementById('orders').innerHTML = orders.map(function (order) {
+          return '<tr>' +
+            '<td>' + new Date(order.created_at).toLocaleDateString() + '</td>' +
+            '<td>' + order.product + '</td>' +
+            '<td>' + order.email + '</td>' +
+            '<td>' + order.declared_country + (order.country_mismatch ? ' / flag' : '') + '</td>' +
+            '<td>' + money(order.gross_amount, order.currency === 'INR' ? '₹' : '$') + '<br><small>+' + money(order.checkout_adjustment, order.currency === 'INR' ? '₹' : '$') + ' adj.</small></td>' +
+            '<td>' + order.status + '</td>' +
+            '<td>' + order.delivery_status + '</td>' +
+          '</tr>';
+        }).join('');
+
+        form.hidden = true;
+        dashboard.hidden = false;
+      })
+      .catch(function (err) {
+        error.textContent = err.message;
+        error.hidden = false;
+      });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    sessionStorage.setItem('stoic_admin_password', document.getElementById('password').value);
+    load();
+  });
+
+  if (sessionStorage.getItem('stoic_admin_password')) load();
+})();
+</script>
+</body>
+</html>

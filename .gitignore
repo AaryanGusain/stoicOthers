@@ -9,6 +9,9 @@
 
 # Python (in case scripts get added later)
 .venv/
+.env
+.env.*
+!.env.example
 __pycache__/
 *.pyc
 

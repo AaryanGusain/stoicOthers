@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete Pack · Stoic Meditations</title>
+<meta name="description" content="Get the Stoic Meditations book PDF, audiobook, and all wallpaper bundles in one $20 complete pack.">
+<meta name="theme-color" content="#f6f1e7">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #ede5d3;
+  --ink: #1c1a17;
+  --rule: #c8bda7;
+  --accent: #6b4d2a;
+  --gold: #c9a253;
+  --muted: #75695b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh;
+  padding: 1.2rem;
+  background: radial-gradient(ellipse at 50% 0%, #f0e9d8 0%, var(--paper) 58%), var(--paper);
+}
+.home-link {
+  position: fixed; top: 0.85rem; left: 0.85rem; z-index: 80;
+  width: 2.45rem; height: 2.45rem; border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  background: rgba(246, 241, 231, 0.88);
+  color: var(--accent); text-decoration: none;
+  box-shadow: 0 14px 34px -24px rgba(28, 26, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+}
+.home-link:hover {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink); transform: translateY(-1px);
+}
+.home-link svg { width: 1.05rem; height: 1.05rem; display: block; }
+.wrap {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wrap { animation: none; }
+}
+.top {
+  text-align: center;
+  padding: 1rem 0 1.8rem;
+}
+.monogram {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  margin: 0 auto 0.75rem;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  box-shadow: 0 12px 26px -12px rgba(28, 26, 23, 0.5);
+}
+.eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-size: clamp(2.3rem, 7vw, 4.8rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+.lede {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 1.1rem;
+  align-items: stretch;
+}
+.summary, .checkout {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: rgba(237, 229, 211, 0.82);
+  padding: 2rem;
+}
+.summary {
+  display: grid;
+  gap: 0.8rem;
+}
+.item {
+  border: 1px solid rgba(107, 77, 42, 0.2);
+  background: rgba(246, 241, 231, 0.5);
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s ease, transform 0.12s ease;
+}
+.item:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.item .label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+.item h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.item p { color: var(--muted); }
+.checkout {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.compare {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.52);
+  margin-bottom: 0.35rem;
+}
+.price {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.sub {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.58);
+  margin-bottom: 2rem;
+}
+form {
+  display: grid;
+  gap: 0.75rem;
+}
+input {
+  padding: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  background: rgba(246, 241, 231, 0.08);
+  border: 1px solid rgba(246, 241, 231, 0.18);
+  color: var(--paper);
+  outline: none;
+}
+input::placeholder { color: rgba(246, 241, 231, 0.42); }
+button {
+  padding: 1.05rem 1.25rem;
+  border: none;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+button:hover { background: var(--gold); }
+.fine {
+  margin-top: 1rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.52);
+}
+.foot {
+  text-align: center;
+  margin-top: 1.3rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.foot a { color: var(--muted); text-decoration: none; }
+.foot a:hover { color: var(--accent); }
+@media (max-width: 760px) {
+  body { padding: 1rem 0.85rem; }
+  .home-link { top: 0.55rem; left: 0.65rem; width: 2.15rem; height: 2.15rem; }
+  .top { padding-top: 0.45rem; }
+  .grid { grid-template-columns: 1fr; }
+  .summary, .checkout { padding: 1.35rem; }
+  .price { font-size: 4rem; }
+  h1 { font-size: clamp(2.2rem, 13vw, 3.4rem); }
+  button { width: 100%; }
+}
+</style>
+</head>
+<body>
+<a class="home-link" href="/" aria-label="Back to Stoic Meditations home">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 5l8 6.5"></path>
+    <path d="M6.5 10.5V19h11v-8.5"></path>
+    <path d="M10 19v-5h4v5"></path>
+  </svg>
+</a>
+<main class="wrap">
+  <header class="top">
+    <div class="monogram" aria-hidden="true">Ⅲ</div>
+    <div class="eyebrow">Complete Pack</div>
+    <h1>Book. Audio. Wallpapers.</h1>
+    <p class="lede">Everything from Stoic Meditations in one checkout. The reader, the full audiobook, and all three wallpaper bundles.</p>
+  </header>
+
+  <section class="grid">
+    <div class="summary" aria-label="Included products">
+      <a class="item" href="/book">
+        <div class="label">The Reader</div>
+        <h2>14 Days to a Stoic Mind</h2>
+        <p>The complete book as a downloadable PDF.</p>
+      </a>
+      <a class="item" href="/audio">
+        <div class="label">The Audiobook</div>
+        <h2>All Three Voices</h2>
+        <p>Chapter-marked M4B editions for each narration.</p>
+      </a>
+      <a class="item" href="/wallpapers">
+        <div class="label">Wallpapers</div>
+        <h2>Three Visual Bundles</h2>
+        <p>Strength, solitude, and wisdom sets for phone, tablet, and desktop.</p>
+      </a>
+    </div>
+
+    <aside class="checkout">
+      <div class="compare"><s>$34.99 separately</s></div>
+      <div class="price">$20</div>
+      <div class="sub">Save $14.99</div>
+      <form id="bundleForm" data-razorpay-product="complete_pack">
+        <input type="email" name="email" placeholder="Your email, where we will send the pack" required autocomplete="email">
+        <button type="submit">Get the complete pack</button>
+      </form>
+      <div class="fine">Secure checkout via Razorpay</div>
+    </aside>
+  </section>
+
+  <div class="foot"><a href="/">Back to Stoic Meditations</a></div>
+</main>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="/assets/razorpay-checkout.js"></script>
+</body>
+</html>

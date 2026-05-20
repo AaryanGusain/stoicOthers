@@ -21,4 +21,4 @@ Stoicism is not asking you to suppress fear. It is asking you to notice that fea
 
 Stoic Meditations
 
-P.S. These five lessons are a sample of the shape of the full book. Fourteen days, fourteen masters of practical wisdom, three quotes per master, one practice per quote. If they helped, the rest is at [stoicmeditations.com](https://stoicmeditations.com/).
+P.S. These five lessons are a sample of the shape of the full book. Fourteen days, fourteen masters of practical wisdom, three quotes per master, one practice per quote. If they helped, the rest is at [stoicmeditations.site](https://stoicmeditations.site/).

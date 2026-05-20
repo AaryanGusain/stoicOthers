@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you · Stoic Meditations</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f1e7">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@400;500;600&display=swap');
+
+:root {
+  --paper: #f6f1e7;
+  --paper-deep: #ede5d3;
+  --paper-warm: #f0e9d8;
+  --ink: #1c1a17;
+  --rule: #c8bda7;
+  --accent: #6b4d2a;
+  --gold: #c9a253;
+  --muted: #75695b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  min-height: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background: radial-gradient(ellipse at 50% 0%, var(--paper-warm) 0%, var(--paper) 58%), var(--paper);
+  padding: 1.4rem;
+}
+.home-link {
+  position: fixed; top: 0.85rem; left: 0.85rem; z-index: 80;
+  width: 2.45rem; height: 2.45rem; border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  background: rgba(246, 241, 231, 0.88);
+  color: var(--accent); text-decoration: none;
+  box-shadow: 0 14px 34px -24px rgba(28, 26, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+}
+.home-link:hover {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink); transform: translateY(-1px);
+}
+.home-link svg { width: 1.05rem; height: 1.05rem; display: block; }
+.wrap {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  min-height: calc(100vh - 2.8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: fadeIn 0.6s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wrap { animation: none; }
+}
+.check {
+  font-size: 3.5rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.45rem;
+}
+.eyebrow {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+.lede {
+  color: var(--muted);
+  max-width: 500px;
+  margin-bottom: 1.4rem;
+}
+.card {
+  width: 100%;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.35rem;
+  box-shadow: 0 20px 44px -30px rgba(28, 26, 23, 0.35);
+}
+.loading, .error {
+  color: var(--accent);
+  font-style: italic;
+}
+.downloads {
+  display: grid;
+  gap: 0.7rem;
+  list-style: none;
+}
+.download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(107, 77, 42, 0.24);
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(246, 241, 231, 0.48);
+}
+.download:hover {
+  border-color: var(--accent);
+}
+.download strong {
+  display: block;
+  font-weight: 500;
+  text-align: left;
+}
+.download span {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.foot {
+  margin-top: 1.2rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.foot a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.foot a:hover {
+  color: var(--accent);
+}
+@media (max-width: 560px) {
+  body { padding: 1rem; }
+  .home-link { top: 0.55rem; left: 0.65rem; width: 2.15rem; height: 2.15rem; }
+  .download { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
+}
+</style>
+</head>
+<body>
+<a class="home-link" href="/" aria-label="Back to Stoic Meditations home">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 5l8 6.5"></path>
+    <path d="M6.5 10.5V19h11v-8.5"></path>
+    <path d="M10 19v-5h4v5"></path>
+  </svg>
+</a>
+<main class="wrap">
+  <div class="check" aria-hidden="true">✓</div>
+  <div class="eyebrow">Thank you</div>
+  <h1>Your download is ready.</h1>
+  <p class="lede">Use the links below to download your files. Save them somewhere safe so you can return to them anytime.</p>
+
+  <section class="card" aria-live="polite">
+    <div class="loading" id="loadingState">Verifying your purchase...</div>
+    <div id="readyState" hidden>
+      <ul class="downloads" id="downloadsList"></ul>
+    </div>
+    <div class="error" id="errorState" hidden>We could not verify this purchase. If payment went through, contact support with your Razorpay payment ID.</div>
+  </section>
+
+  <div class="foot"><a href="/">Back to Stoic Meditations</a></div>
+</main>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var orderId = params.get('order_id');
+  var loading = document.getElementById('loadingState');
+  var ready = document.getElementById('readyState');
+  var error = document.getElementById('errorState');
+  var list = document.getElementById('downloadsList');
+
+  function showError(message) {
+    loading.hidden = true;
+    ready.hidden = true;
+    error.hidden = false;
+    if (message) error.textContent = message;
+  }
+
+  if (!orderId) {
+    showError('Missing order ID. Please return to the product page and try again.');
+    return;
+  }
+
+  fetch('/api/order-downloads?order_id=' + encodeURIComponent(orderId))
+    .then(function (r) {
+      if (!r.ok) throw new Error('Verification failed');
+      return r.json();
+    })
+    .then(function (data) {
+      if (!data.deliverables || !data.deliverables.length) throw new Error('No downloads');
+      document.querySelector('h1').textContent = data.title || 'Your download is ready.';
+      data.deliverables.forEach(function (item) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        var label = document.createElement('strong');
+        var type = document.createElement('span');
+        a.className = 'download';
+        a.href = item.href;
+        a.download = item.filename || '';
+        label.textContent = item.label;
+        type.textContent = (item.type || 'Download') + ' ↓';
+        a.appendChild(label);
+        a.appendChild(type);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      loading.hidden = true;
+      ready.hidden = false;
+    })
+    .catch(function () {
+      showError();
+    });
+})();
+</script>
+</body>
+</html>

@@ -27,6 +27,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 html, body {
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
@@ -45,6 +47,23 @@ body {
   display: flex;
   flex-direction: column;
 }
+.home-link {
+  position: fixed; top: 0.85rem; left: 0.85rem; z-index: 80;
+  width: 2.45rem; height: 2.45rem; border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  background: rgba(246, 241, 231, 0.88);
+  color: var(--accent); text-decoration: none;
+  box-shadow: 0 14px 34px -24px rgba(28, 26, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+}
+.home-link:hover {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink); transform: translateY(-1px);
+}
+.home-link svg { width: 1.05rem; height: 1.05rem; display: block; }
 
 .wrap {
   max-width: 960px; width: 100%;
@@ -57,6 +76,9 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wrap { animation: none; }
 }
 
 /* ===== Header ===== */
@@ -255,6 +277,75 @@ body {
 .buy:hover { background: var(--accent); transform: translateY(-1px); }
 .buy .arrow { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 0; }
 
+.complete-card {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  padding: 2.2rem;
+  margin: 1rem 0 0;
+  box-shadow: 0 30px 80px -44px rgba(28, 26, 23, 0.62);
+}
+.complete-card .eyebrow {
+  color: var(--gold);
+  text-align: left;
+}
+.complete-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.1rem;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+.complete-card .price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.complete-card .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.8rem;
+  line-height: 1;
+}
+.complete-card s {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.5);
+}
+.complete-card ul {
+  list-style: none;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.complete-card li {
+  border-bottom: 1px solid rgba(246, 241, 231, 0.12);
+  padding-bottom: 0.55rem;
+}
+.complete-card li::before {
+  content: '·';
+  color: var(--gold);
+  margin-right: 0.45rem;
+}
+.complete-card a:not(.buy) {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+}
+.complete-card a:not(.buy):hover { color: var(--gold); }
+.complete-card .buy {
+  background: var(--paper);
+  color: var(--ink);
+}
+.complete-card .buy:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
 /* ===== Footnote ===== */
 .footnote {
   text-align: center;
@@ -290,14 +381,28 @@ footer .dot { opacity: 0.5; }
 
 /* ===== Small-screen polish ===== */
 @media (max-width: 520px) {
+  body { padding: 1rem 0.85rem 1rem; }
+  .home-link { top: 0.55rem; left: 0.65rem; width: 2.15rem; height: 2.15rem; }
+  .topbar { padding-top: 0.35rem; }
   .previews { grid-template-columns: repeat(2, 1fr); }
   .bundle { padding: 1.25rem 1.2rem 1.15rem; }
   .bundle-title { font-size: 1.45rem; }
   .bundle-price { font-size: 1.55rem; }
+  .bundle-head { gap: 0.8rem; }
+  .buy { width: 100%; justify-content: center; }
+  .complete-card { padding: 1.4rem 1.2rem; }
+  .price-row { align-items: flex-start; flex-direction: column; gap: 0.15rem; }
 }
 </style>
 </head>
 <body>
+<a class="home-link" href="/" aria-label="Back to Stoic Meditations home">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 5l8 6.5"></path>
+    <path d="M6.5 10.5V19h11v-8.5"></path>
+    <path d="M10 19v-5h4v5"></path>
+  </svg>
+</a>
 
 <main class="wrap">
 
@@ -321,7 +426,7 @@ footer .dot { opacity: 0.5; }
       </svg>
     </div>
     <nav class="crumb">
-      <a href="https://stoicmeditations.com/">Stoic Meditations</a>
+      <a href="https://stoicmeditations.site/">Stoic Meditations</a>
       <span class="sep">·</span>
       <span>Wallpapers</span>
     </nav>
@@ -348,16 +453,15 @@ footer .dot { opacity: 0.5; }
         <div class="bundle-price"><span class="currency">$</span>5</div>
       </div>
       <div class="previews">
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
+        <div class="preview"><img src="/wallpapers/bundle-a/01-spartan-helmet-stone.jpg" alt="Spartan helmet stone wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-a/02-forge-anvil-sparks.jpg" alt="Forge anvil sparks wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-a/03-gladius-on-stone.jpg" alt="Gladius on stone wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-a/04-centurion-back.jpg" alt="Centurion wallpaper preview" loading="lazy" decoding="async"></div>
       </div>
       <div class="bundle-spec">
         20 wallpapers <span class="dot">·</span> phone <span class="dot">·</span> tablet <span class="dot">·</span> desktop
       </div>
-      <!-- TODO: replace href with the Stripe Payment Link for Bundle A -->
-      <a class="buy" href="STRIPE_PAYMENT_LINK_A" data-bundle="a" rel="noopener">
+      <a class="buy" href="#" data-checkout-product="wallpaper_strength">
         Buy Bundle I <span class="arrow">→</span>
       </a>
     </article>
@@ -373,15 +477,15 @@ footer .dot { opacity: 0.5; }
         <div class="bundle-price"><span class="currency">$</span>5</div>
       </div>
       <div class="previews">
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
+        <div class="preview"><img src="/wallpapers/bundle-b/01-lone-monk-bridge.jpg" alt="Lone monk bridge wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-b/02-lighthouse-dawn.jpg" alt="Lighthouse dawn wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-b/03-empty-dock-lake.jpg" alt="Empty dock lake wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-b/04-single-tree-hill.jpg" alt="Single tree hill wallpaper preview" loading="lazy" decoding="async"></div>
       </div>
       <div class="bundle-spec">
         20 wallpapers <span class="dot">·</span> phone <span class="dot">·</span> tablet <span class="dot">·</span> desktop
       </div>
-      <a class="buy" href="STRIPE_PAYMENT_LINK_B" data-bundle="b" rel="noopener">
+      <a class="buy" href="#" data-checkout-product="wallpaper_solitude">
         Buy Bundle II <span class="arrow">→</span>
       </a>
     </article>
@@ -397,30 +501,45 @@ footer .dot { opacity: 0.5; }
         <div class="bundle-price"><span class="currency">$</span>5</div>
       </div>
       <div class="previews">
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
-        <div class="preview placeholder" aria-hidden="true"></div>
+        <div class="preview"><img src="/wallpapers/bundle-c/Quill%20and%20Candle%20Wallpaper%20May%2020%202026.png" alt="Quill and candle wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-c/Quill%20and%20Candle%20Wallpaper%20May%2020%202026%20(1).png" alt="Quill and candle wallpaper variation preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-c/Quill%20and%20Candle%20Wallpaper%20May%2020%202026%20(2).png" alt="Classical study wallpaper preview" loading="lazy" decoding="async"></div>
+        <div class="preview"><img src="/wallpapers/bundle-c/Quill%20and%20Candle%20Wallpaper%20May%2020%202026%20(3).png" alt="Wisdom and reflection wallpaper preview" loading="lazy" decoding="async"></div>
       </div>
       <div class="bundle-spec">
         20 wallpapers <span class="dot">·</span> phone <span class="dot">·</span> tablet <span class="dot">·</span> desktop
       </div>
-      <a class="buy" href="STRIPE_PAYMENT_LINK_C" data-bundle="c" rel="noopener">
+      <a class="buy" href="#" data-checkout-product="wallpaper_wisdom">
         Buy Bundle III <span class="arrow">→</span>
       </a>
     </article>
 
   </section>
 
+  <section class="complete-card" aria-label="Complete pack">
+    <div class="eyebrow">Complete Pack</div>
+    <h2>Everything in one checkout.</h2>
+    <div class="price-row">
+      <div class="price">$20</div>
+      <s>$34.99 separately</s>
+    </div>
+    <ul>
+      <li><a href="/book">14 Days to a Stoic Mind PDF</a></li>
+      <li><a href="/audio">Audiobook with all three voices</a></li>
+      <li>All three wallpaper bundles on this page</li>
+    </ul>
+    <a class="buy" href="#" data-checkout-product="complete_pack">Get the complete pack <span class="arrow">→</span></a>
+  </section>
+
   <blockquote class="footnote">
-    <p>Lifetime access. Your download link is shown after checkout and emailed for safekeeping.</p>
+    <p>Lifetime access. Buy one bundle for $5, or get everything for $20.</p>
   </blockquote>
 
   <footer>
     <div class="row">
       <span>© 2026 · Stoic Meditations</span>
       <span class="dot">·</span>
-      <a href="https://stoicmeditations.com/">Home</a>
+      <a href="/">Home</a>
       <span class="dot">·</span>
       <a href="https://instagram.com/stoicismwidget" target="_blank" rel="noopener">@stoicismwidget</a>
     </div>
@@ -428,33 +547,8 @@ footer .dot { opacity: 0.5; }
 
 </main>
 
-<script>
-(function () {
-  // Wire each .preview placeholder to its real export image once available.
-  // We probe four representative ids per bundle. If the file 404s we leave the
-  // placeholder pattern visible — no broken-image icon, no console spam.
-  var picks = {
-    a: ['01-spartan-red', '06-bronze-emperor', '13-greek-night', '17-viral-dark-quote'],
-    b: ['01-lone-silhouette', '04-fog-line', '12-silent-mountains', '14-dawn-sea-poster'],
-    c: ['01-marcus-aurelius-head', '05-socrates-bust', '13-confucius-portrait', '18-aged-parchment']
-  };
-  Object.keys(picks).forEach(function (b) {
-    var blocks = document.querySelectorAll('#bundle-' + b + ' .preview');
-    picks[b].forEach(function (id, i) {
-      if (!blocks[i]) return;
-      var img = new Image();
-      img.alt = '';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.onload = function () {
-        blocks[i].classList.remove('placeholder');
-        blocks[i].appendChild(img);
-      };
-      img.src = '../../wallpapers/exports/bundle-' + b + '/phone/' + id + '.jpg';
-    });
-  });
-})();
-</script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="/assets/razorpay-checkout.js"></script>
 
 </body>
 </html>

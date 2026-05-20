@@ -28,6 +28,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 html, body {
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
@@ -428,7 +430,7 @@ footer .dot { opacity: 0.5; }
     <!-- LEFT: primary email capture -->
     <section class="subscribe" id="subscribe">
       <div class="eyebrow">5 Free Lessons</div>
-      <h2><strong>Five Stoic lessons</strong>, in your inbox the moment you sign up.</h2>
+      <h2><strong>Five FREE Stoic lessons</strong>, in your inbox the moment you sign up.</h2>
       <p class="subhead">A short introduction to the practice of Stoicism. All five sent at once.</p>
       <form id="subscribeForm" novalidate>
         <input type="email" name="email" placeholder="Your email" required autocomplete="email" aria-label="Email address">
@@ -445,7 +447,7 @@ footer .dot { opacity: 0.5; }
     <!-- RIGHT: resource cards -->
     <section class="cards" aria-label="Resources">
 
-      <a class="card" href="https://book.stoicmeditations.com" target="_blank" rel="noopener">
+      <a class="card" href="/book">
         <span class="numeral" aria-hidden="true">I</span>
         <div class="card-body">
           <div class="eyebrow">The Reader</div>
@@ -455,18 +457,8 @@ footer .dot { opacity: 0.5; }
         <span class="arrow" aria-hidden="true">→</span>
       </a>
 
-      <a class="card" href="#subscribe" id="scrollToSubscribe">
+      <a class="card" href="/audio">
         <span class="numeral" aria-hidden="true">II</span>
-        <div class="card-body">
-          <div class="eyebrow">Newsletter</div>
-          <div class="title">5 Free Stoic Lessons</div>
-          <div class="desc">Five short lessons, sent the moment you sign up.</div>
-        </div>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-
-      <a class="card" href="https://audio.stoicmeditations.com" target="_blank" rel="noopener">
-        <span class="numeral" aria-hidden="true">III</span>
         <div class="card-body">
           <div class="eyebrow">The Audiobook</div>
           <div class="title">14 Days, Now Narrated</div>
@@ -475,12 +467,22 @@ footer .dot { opacity: 0.5; }
         <span class="arrow" aria-hidden="true">→</span>
       </a>
 
-      <a class="card" href="https://wallpapers.stoicmeditations.com" target="_blank" rel="noopener">
-        <span class="numeral" aria-hidden="true">IV</span>
+      <a class="card" href="/wallpapers">
+        <span class="numeral" aria-hidden="true">III</span>
         <div class="card-body">
           <div class="eyebrow">Wallpapers</div>
           <div class="title">Three Wallpaper Bundles</div>
           <div class="desc">20 wallpapers each. Phone, tablet, desktop.</div>
+        </div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a class="card" href="/bundle">
+        <span class="numeral" aria-hidden="true">IV</span>
+        <div class="card-body">
+          <div class="eyebrow">Complete Pack</div>
+          <div class="title">Everything · $20</div>
+          <div class="desc">Book, audiobook, and all wallpaper bundles.</div>
         </div>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
@@ -506,12 +508,6 @@ footer .dot { opacity: 0.5; }
 
 <script>
 (function () {
-  // === Kit (ConvertKit) form ID ===
-  // After creating the "Five Free Stoic Lessons" form in Kit, copy the numeric ID
-  // from the form's URL (kit.com/forms/<ID>/edit) and paste it below.
-  // See docs/kit-setup.md for the full setup walkthrough.
-  const KIT_FORM_ID = 'REPLACE_WITH_KIT_FORM_ID';
-
   const SUB_KEY = 'sm_main_subscribe_v1';
   const subSection = document.getElementById('subscribe');
   const subForm = document.getElementById('subscribeForm');
@@ -527,28 +523,37 @@ footer .dot { opacity: 0.5; }
     const email = emailInput.value.trim();
     if (!email) return;
 
-    // Optimistic UI: flip to success state immediately. Kit's confirmation email
-    // is the real receipt — the network call is fire-and-forget.
-    localStorage.setItem(SUB_KEY, 'subscribed:' + email);
-    subSection.classList.add('submitted');
-
-    if (KIT_FORM_ID && KIT_FORM_ID !== 'REPLACE_WITH_KIT_FORM_ID') {
-      fetch('https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email_address: email })
-      }).catch(function () { /* swallow: optimistic flow already shown */ });
-    } else {
-      console.warn('[Kit] KIT_FORM_ID not configured. Email captured locally only:', email);
-    }
+    const button = subForm.querySelector('button');
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = 'Sending...';
+    fetch('/api/subscribe-lessons', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
+    })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Could not send lessons');
+        localStorage.setItem(SUB_KEY, 'subscribed:' + email);
+        subSection.classList.add('submitted');
+      })
+      .catch(function () {
+        alert('The lessons could not be sent right now. Please try again in a minute.');
+      })
+      .finally(function () {
+        button.disabled = false;
+        button.textContent = originalText;
+      });
   });
 
-  scrollLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    subSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if (subSection.classList.contains('submitted')) return;
-    setTimeout(function () { emailInput.focus({ preventScroll: true }); }, 480);
-  });
+  if (scrollLink) {
+    scrollLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      subSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (subSection.classList.contains('submitted')) return;
+      setTimeout(function () { emailInput.focus({ preventScroll: true }); }, 480);
+    });
+  }
 })();
 </script>
 

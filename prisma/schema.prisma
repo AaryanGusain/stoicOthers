@@ -1,0 +1,184 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderStatus {
+  created
+  paid
+  failed
+  refunded
+  partially_refunded
+}
+
+enum DeliveryStatus {
+  pending
+  sent
+  failed
+  skipped
+}
+
+model Customer {
+  id                   String   @id @default(cuid())
+  email                String   @unique
+  name                 String?
+  firstDeclaredCountry String?  @map("first_declared_country")
+  firstIpCountry       String?  @map("first_ip_country")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+  orders               DigitalOrder[]
+
+  @@map("customers")
+}
+
+model DigitalOrder {
+  id                   String         @id @default(cuid())
+  productId            String         @map("product_id")
+  productName          String         @map("product_name")
+  customerId           String?        @map("customer_id")
+  customer             Customer?      @relation(fields: [customerId], references: [id])
+  customerEmail        String         @map("customer_email")
+  customerName         String?        @map("customer_name")
+  declaredCountry      String         @map("declared_country")
+  declaredStateRegion  String?        @map("declared_state_region")
+  ipAddress            String?        @map("ip_address")
+  ipCountry            String?        @map("ip_country")
+  countryMismatch      Boolean        @default(false) @map("country_mismatch")
+  currency             String
+  displayCurrency      String?        @map("display_currency")
+  listedPrice          Decimal        @map("listed_price") @db.Decimal(12, 2)
+  grossAmount          Int            @map("gross_amount")
+  taxAmountIfAny       Int            @default(0) @map("tax_amount_if_any")
+  discountAmount       Int            @default(0) @map("discount_amount")
+  netAmountEstimated   Int            @default(0) @map("net_amount_estimated")
+  razorpayOrderId      String?        @unique @map("razorpay_order_id")
+  razorpayPaymentId    String?        @map("razorpay_payment_id")
+  status               OrderStatus    @default(created)
+  paymentMethod        String?        @map("payment_method")
+  paymentInternational Boolean?       @map("payment_international")
+  notesJson            Json?          @map("notes_json")
+  referrer             String?
+  userAgent            String?        @map("user_agent")
+  browserLocale        String?        @map("browser_locale")
+  utmSource            String?        @map("utm_source")
+  utmMedium            String?        @map("utm_medium")
+  utmCampaign          String?        @map("utm_campaign")
+  utmContent           String?        @map("utm_content")
+  utmTerm              String?        @map("utm_term")
+  deliveryStatus       DeliveryStatus @default(pending) @map("delivery_status")
+  deliveryEmailSentAt  DateTime?      @map("delivery_email_sent_at")
+  deliveryError        String?        @map("delivery_error")
+  createdAt            DateTime       @default(now()) @map("created_at")
+  paidAt               DateTime?      @map("paid_at")
+  updatedAt            DateTime       @updatedAt @map("updated_at")
+  payments             RazorpayPayment[]
+  refunds              Refund[]
+  deliveries           Delivery[]
+
+  @@index([customerEmail])
+  @@index([status])
+  @@index([createdAt])
+  @@map("digital_orders")
+}
+
+model RazorpayPayment {
+  id                         String        @id @default(cuid())
+  digitalOrderId             String?       @map("digital_order_id")
+  digitalOrder               DigitalOrder? @relation(fields: [digitalOrderId], references: [id])
+  razorpayPaymentId          String        @unique @map("razorpay_payment_id")
+  razorpayOrderId            String?       @map("razorpay_order_id")
+  razorpaySignatureVerified  Boolean       @default(false) @map("razorpay_signature_verified")
+  amount                     Int
+  currency                   String
+  fee                        Int?
+  tax                        Int?
+  method                     String?
+  cardNetwork                String?       @map("card_network")
+  cardIssuer                 String?       @map("card_issuer")
+  cardInternational          Boolean?      @map("card_international")
+  captured                   Boolean?
+  status                     String?
+  rawPayloadJson             Json          @map("raw_payload_json")
+  createdAt                  DateTime      @default(now()) @map("created_at")
+
+  @@index([razorpayOrderId])
+  @@map("razorpay_payments")
+}
+
+model WebhookEvent {
+  id                String   @id @default(cuid())
+  providerEventId   String?  @unique @map("provider_event_id")
+  event             String
+  signatureVerified Boolean  @default(false) @map("signature_verified")
+  rawPayloadJson    Json     @map("raw_payload_json")
+  processedAt       DateTime? @map("processed_at")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  @@map("webhook_events")
+}
+
+model Refund {
+  id                String        @id @default(cuid())
+  digitalOrderId    String?       @map("digital_order_id")
+  digitalOrder      DigitalOrder? @relation(fields: [digitalOrderId], references: [id])
+  razorpayRefundId  String?       @unique @map("razorpay_refund_id")
+  razorpayPaymentId String?       @map("razorpay_payment_id")
+  amount            Int
+  currency          String?
+  status            String?
+  rawPayloadJson    Json?         @map("raw_payload_json")
+  createdAt         DateTime      @default(now()) @map("created_at")
+
+  @@map("refunds")
+}
+
+model Payout {
+  id             String   @id @default(cuid())
+  payoutId       String?  @unique @map("payout_id")
+  amount         Int
+  currency       String
+  status         String?
+  periodStart    DateTime? @map("period_start")
+  periodEnd      DateTime? @map("period_end")
+  rawPayloadJson Json?    @map("raw_payload_json")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("payouts")
+}
+
+model Delivery {
+  id             String        @id @default(cuid())
+  digitalOrderId String        @map("digital_order_id")
+  digitalOrder   DigitalOrder  @relation(fields: [digitalOrderId], references: [id])
+  email          String
+  status         DeliveryStatus @default(pending)
+  provider       String?
+  providerId     String?       @map("provider_id")
+  error          String?
+  sentAt         DateTime?     @map("sent_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  @@index([digitalOrderId])
+  @@map("deliveries")
+}
+
+model MonthlySummary {
+  id                       String   @id @default(cuid())
+  month                    String   @unique
+  grossByCurrency          Json     @map("gross_by_currency")
+  grossInrEstimated        Int?     @map("gross_inr_estimated")
+  fees                     Int?
+  refunds                  Int?
+  netRevenue               Int?     @map("net_revenue")
+  buyerCountries           Json?    @map("buyer_countries")
+  internationalSalesCount  Int      @default(0) @map("international_sales_count")
+  indiaSalesCount          Int      @default(0) @map("india_sales_count")
+  topTrafficSources        Json?    @map("top_traffic_sources")
+  createdAt                DateTime @default(now()) @map("created_at")
+
+  @@map("monthly_summaries")
+}

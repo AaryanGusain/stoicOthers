@@ -1,12 +1,13 @@
 # Deploy to Vercel
 
-One Vercel project hosts all four sites. A single `vercel.json` at the repo root uses host-based rewrites to route each subdomain to its folder.
+One Vercel project hosts the main site and product pages. A single `vercel.json` at the repo root uses path-based rewrites to route each page to its folder.
 
 ```
-stoicmeditations.com               → apps/main/
-book.stoicmeditations.com          → apps/book/
-audio.stoicmeditations.com         → apps/audiobook/
-wallpapers.stoicmeditations.com    → apps/wallpapers/
+stoicmeditations.site              → apps/main/
+stoicmeditations.site/book         → apps/book/
+stoicmeditations.site/audio        → apps/audiobook/
+stoicmeditations.site/wallpapers   → apps/wallpapers/
+stoicmeditations.site/bundle       → apps/bundle/
 ```
 
 One push to `main`, all four sites redeploy together.
@@ -17,7 +18,7 @@ One push to `main`, all four sites redeploy together.
 
 Recommended registrars: [Porkbun](https://porkbun.com) or [Namecheap](https://namecheap.com). Both have reasonable prices and clean DNS UIs. `.com` is around $10–12/year.
 
-Buy `stoicmeditations.com`. You do not need to buy subdomains separately; subdomains are configured via DNS records under the root domain.
+Buy `stoicmeditations.site`. You do not need to buy subdomains separately; subdomains are configured via DNS records under the root domain.
 
 ## 2. Create the Vercel project
 
@@ -30,32 +31,26 @@ Buy `stoicmeditations.com`. You do not need to buy subdomains separately; subdom
 7. **Output Directory**: leave empty (Vercel serves the repo as-is, with `vercel.json` doing the routing).
 8. Click **Deploy**.
 
-The first deploy will succeed but the rewrites won't take effect until domains are attached.
+The first deploy will succeed. Preview URLs will also support `/book`, `/audio`, and `/wallpapers`.
 
-## 3. Attach the four domains
+## 3. Attach the domain
 
-In the Vercel project, go to **Settings → Domains** and add each of these one at a time:
+In the Vercel project, go to **Settings → Domains** and add:
 
-- `stoicmeditations.com`
-- `www.stoicmeditations.com` (Vercel will offer to redirect this to the apex; accept)
-- `book.stoicmeditations.com`
-- `audio.stoicmeditations.com`
-- `wallpapers.stoicmeditations.com`
+- `stoicmeditations.site`
+- `www.stoicmeditations.site` (Vercel will offer to redirect this to the apex; accept)
 
 For each one, Vercel will show the exact DNS record to add. Two patterns:
 
-**For the apex** (`stoicmeditations.com`):
+**For the apex** (`stoicmeditations.site`):
 - Add an **A record** at the registrar:
   ```
   Type: A    Host: @    Value: 76.76.21.21
   ```
 
-**For each subdomain** (`book`, `audio`, `wallpapers`, `www`):
+**For `www`**:
 - Add a **CNAME record**:
   ```
-  Type: CNAME    Host: book        Value: cname.vercel-dns.com
-  Type: CNAME    Host: audio       Value: cname.vercel-dns.com
-  Type: CNAME    Host: wallpapers  Value: cname.vercel-dns.com
   Type: CNAME    Host: www         Value: cname.vercel-dns.com
   ```
 
@@ -67,12 +62,14 @@ DNS propagation usually takes 5–30 minutes. Vercel will say `Valid Configurati
 
 Once all domains show `Valid Configuration`:
 
-- `https://stoicmeditations.com` should load the main link-in-bio site.
-- `https://book.stoicmeditations.com` should load the book sales page.
-- `https://audio.stoicmeditations.com` should load the audiobook page.
-- `https://wallpapers.stoicmeditations.com` should load the wallpapers page.
+- `https://stoicmeditations.site` should load the main link-in-bio site.
+- `https://stoicmeditations.site/book` should load the book sales page.
+- `https://stoicmeditations.site/audio` should load the audiobook page.
+- `https://stoicmeditations.site/wallpapers` should load the wallpapers page.
+- `https://stoicmeditations.site/bundle` should load the complete pack page.
+- `https://stoicmeditations.site/admin` should load the password-protected sales dashboard.
 
-If any of these load the wrong site, check `vercel.json` at the repo root and confirm the `has.value` for that host matches the domain exactly.
+If any of these load the wrong site, check `vercel.json` at the repo root and confirm the path rewrites are ordered before the final catch-all rewrite.
 
 ## 5. Future deploys
 
@@ -86,10 +83,27 @@ Every `git push` to `main` triggers a redeploy of the whole project. Pull reques
 - Each individual file is under 100 MB (the largest is the `~42 MB .m4b`). No Git LFS required.
 - If you ever exceed Hobby plan limits, the cheapest upgrade is Vercel Pro ($20/mo). An alternative is to move heavy files (mp3s, zips) to Cloudflare R2 or Vercel Blob storage and reference them by URL from the HTML. Out of scope for this initial deploy.
 
-## What's NOT yet wired up (deploy will still work without these)
+## Runtime configuration
 
-- **Kit form ID**: replace `REPLACE_WITH_KIT_FORM_ID` in `apps/main/index.html` and `apps/book/index.html`. See [kit-setup.md](kit-setup.md).
-- **Stripe Payment Links** for the wallpaper bundles: in `apps/wallpapers/index.html`, search for `STRIPE_PAYMENT_LINK_A` / `_B` / `_C` and replace with the real Stripe Payment Link URLs once Stripe is set up.
-- **Wallpaper fulfillment endpoint**: `apps/wallpapers/thank-you.html` POSTs to `https://wallpapers.stoicmeditations.com/fulfill`. That endpoint does not yet exist — it needs to be built as a Vercel Function or a Cloudflare Worker. Until it exists, the thank-you page will show an error state; the email link from Stripe is the user's working delivery path.
-- **Book Gumroad/Stripe checkout** for the $9 ebook on `apps/book/index.html`. Currently the buy form captures the email and shows a placeholder alert.
-- **Book PDF and EPUB downloads** in `apps/book/downloads/`. Files not yet produced.
+- **Razorpay keys**: set `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, and `RAZORPAY_WEBHOOK_SECRET` in Vercel Project Settings -> Environment Variables. Use test mode first, then switch to live.
+- **Database**: set `DATABASE_URL` to your Neon/Postgres connection string, then run `npm run db:migrate`.
+- **Email delivery**: set `EMAIL_API_KEY` for Resend and `EMAIL_FROM` to a verified sender. This powers both the five free lessons and paid product delivery.
+- **Admin**: set `ADMIN_PASSWORD` before using `/admin` or `/api/admin/export-sales.csv`.
+- **Download secret**: set `EBOOK_DOWNLOAD_SECRET` for future signed links. Current v1 uses permanent direct download links.
+- **Book PDF**: regenerate with `npm run generate:book-pdf` after editing `apps/book/preview.html`.
+
+## Razorpay webhook
+
+Add this webhook URL in Razorpay:
+
+```text
+https://stoicmeditations.site/api/webhooks/razorpay
+```
+
+Subscribe to:
+
+- `payment.captured`
+- `payment.failed`
+- `refund.created`
+- `refund.processed`
+- `order.paid`

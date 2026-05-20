@@ -1,0 +1,18 @@
+{
+  "name": "stoic-meditations",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "generate:book-pdf": "node scripts/generate-book-pdf.js",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "monthly:summary": "node scripts/monthly-summary.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0",
+    "prisma": "^6.19.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3"
+  }
+}

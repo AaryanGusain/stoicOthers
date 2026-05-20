@@ -131,12 +131,43 @@ footer.colophon {
   font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); text-align: center;
 }
+.license-page {
+  margin-top: 6rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--rule);
+}
+.license-page h1 {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin: 0 0 2rem;
+}
+.license-page p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+}
+.license-page .publisher {
+  margin-top: 2rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
 
 @media print {
   body { background: white; }
   .book { padding: 0; max-width: none; }
   section.chapter { page-break-before: always; }
   section.chapter:first-of-type { page-break-before: avoid; }
+  .license-page { page-break-before: always; }
   .toc { page-break-after: always; }
   .title-page { page-break-after: always; min-height: auto; }
 }
@@ -600,6 +631,15 @@ footer.colophon {
 <p>This is the chapter the book has been walking toward. Thirteen days have offered tools, disciplines, standards. Laozi closes with a warning about what happens when those disciplines harden into rigidities. The person who has worked very hard at being a Stoic, a strategist, an examined adult, can end up brittle, defending the position they trained into rather than meeting what is actually in front of them. The training was supposed to produce flexibility. The graduate sometimes uses it to produce stone.</p>
 <p>So take the practices, walk them for a long time, and then stay soft. Bend toward what is happening. Reality does not negotiate with rigidity. It outlasts it. The supple stay alive.</p>
 <p><strong>Try this:</strong> Consider one position, opinion, or routine you have hardened into over the past year. You might sit with the possibility that you might be wrong about it. Other possibilities: talk to one person who sees it differently, or let yourself imagine what would change if you released the position for an afternoon.</p>
+</section>
+<section class="license-page" id="rights-license">
+<h1>Rights and License</h1>
+<p>Copyright &copy; 2026 Stoic Meditations. All rights reserved.</p>
+<p>This copy was sold to one reader for personal, non-commercial use. The buyer may read it on any device they own. They may not resell it, lend it, give it away, post it, host it, mirror it, or feed it to a model.</p>
+<p>Each copy is logged to its original purchaser at point of sale. Files found in unauthorized distribution can be traced back to source.</p>
+<p>If this copy reached you through any route other than a purchase from stoicmeditations.site or an authorized retailer, the person who shared it has broken the terms of their license, and you are holding a copy you do not own. The honest move is to buy your own. It costs less than a coffee.</p>
+<p>For permissions, licensing, bulk orders, or to report unauthorized distribution, write to us through stoicmeditations.site.</p>
+<p class="publisher">Published by Stoic Meditations. stoicmeditations.site</p>
 </section>
 <footer class="colophon">Compiled from manuscript</footer>
 </div>

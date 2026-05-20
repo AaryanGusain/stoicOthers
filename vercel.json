@@ -4,19 +4,44 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "book.stoicmeditations.com" }],
+      "source": "/assets/(.*)",
+      "destination": "/apps/assets/$1"
+    },
+    {
+      "source": "/admin",
+      "destination": "/apps/admin/index.html"
+    },
+    {
+      "source": "/book",
+      "destination": "/apps/book/index.html"
+    },
+    {
+      "source": "/book/(.*)",
       "destination": "/apps/book/$1"
     },
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "audio.stoicmeditations.com" }],
+      "source": "/audio",
+      "destination": "/apps/audiobook/index.html"
+    },
+    {
+      "source": "/audio/(.*)",
       "destination": "/apps/audiobook/$1"
     },
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "wallpapers.stoicmeditations.com" }],
+      "source": "/wallpapers",
+      "destination": "/apps/wallpapers/index.html"
+    },
+    {
+      "source": "/wallpapers/(.*)",
       "destination": "/apps/wallpapers/$1"
+    },
+    {
+      "source": "/bundle",
+      "destination": "/apps/bundle/index.html"
+    },
+    {
+      "source": "/thank-you",
+      "destination": "/apps/thank-you/index.html"
     },
     {
       "source": "/(.*)",

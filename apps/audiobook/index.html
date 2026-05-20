@@ -25,6 +25,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 html, body {
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
@@ -33,8 +35,33 @@ html, body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+body { animation: fadeIn 0.6s ease-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+}
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.home-link {
+  position: fixed; top: 0.85rem; left: 0.85rem; z-index: 80;
+  width: 2.45rem; height: 2.45rem; border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  background: rgba(246, 241, 231, 0.88);
+  color: var(--accent); text-decoration: none;
+  box-shadow: 0 14px 34px -24px rgba(28, 26, 23, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+}
+.home-link:hover {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink); transform: translateY(-1px);
+}
+.home-link svg { width: 1.05rem; height: 1.05rem; display: block; }
 
 /* ------- Sticky top nav ------- */
 nav.top {
@@ -324,6 +351,14 @@ section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
 }
 
 /* ------- Pricing ------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: stretch;
+  max-width: 980px;
+  margin: 0 auto;
+}
 .pricing-card {
   background: var(--ink); color: var(--paper);
   padding: 3.5rem 3rem;
@@ -331,6 +366,23 @@ section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
   border-radius: 4px; text-align: center;
   box-shadow: 0 40px 100px -40px rgba(28, 26, 23, 0.45);
 }
+.pricing-grid .pricing-card {
+  width: 100%;
+  max-width: none;
+}
+.pricing-card.featured {
+  border: 1px solid rgba(201, 162, 83, 0.58);
+  box-shadow: 0 46px 110px -42px rgba(107, 77, 42, 0.65);
+}
+.compare-price {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 241, 231, 0.55);
+  margin-bottom: 0.3rem;
+}
+.compare-price s { color: rgba(246, 241, 231, 0.45); }
 .pricing-card .price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 4.5rem; font-weight: 500; line-height: 1;
@@ -356,6 +408,13 @@ section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
   content: '·'; color: var(--gold);
   font-size: 1.5rem; line-height: 1; opacity: 0.8;
 }
+.pricing-card li a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+}
+.pricing-card li a:hover { color: var(--gold); }
 .pricing-form { display: flex; flex-direction: column; gap: 0.75rem; }
 .pricing-form input {
   padding: 1rem;
@@ -380,6 +439,11 @@ section.block { padding: 6rem 0; border-top: 1px solid var(--rule); }
   transition: background 0.18s ease;
 }
 .pricing-form button:hover { background: var(--gold); color: var(--ink); }
+.pricing-card .btn-secondary {
+  color: var(--paper);
+  text-decoration-color: var(--gold);
+}
+.pricing-card .btn-secondary:hover { color: var(--gold); }
 .pricing-card .form-fineprint {
   margin-top: 1rem;
   font-family: 'Inter Tight', sans-serif;
@@ -428,8 +492,30 @@ footer .copyright {
 
 /* ------- Responsive ------- */
 @media (max-width: 880px) {
+  .home-link { top: 0.55rem; left: 0.65rem; width: 2.15rem; height: 2.15rem; }
+  nav.top { padding: 0.75rem 0 0.85rem; }
+  nav.top .container {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0.8rem;
+    padding-left: 3.25rem;
+  }
+  nav.top .wordmark {
+    width: 100%;
+    text-align: center;
+    padding-right: 2.75rem;
+    line-height: 1.15;
+  }
+  nav.top .right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.75rem;
+  }
+  nav.top .buy { padding: 0.5rem 0.8rem; }
   .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .audio-showcase { max-width: 320px; margin: 0 auto; }
+  .audio-showcase { width: min(320px, 100%); max-width: 100%; margin: 0 auto; }
   .hero-copy { padding-left: 0; text-align: center; }
   .hero-copy h1 { font-size: 2.3rem; }
   .hero-copy .hook { margin: 0 auto 2rem; }
@@ -441,6 +527,8 @@ footer .copyright {
   .section-title { font-size: 1.8rem; }
   .container { padding: 0 1.25rem; }
   .hero { padding: 3rem 0 4rem; }
+  .btn-primary { width: 100%; justify-content: center; padding: 1rem 1.2rem; }
+  .btn-secondary { width: 100%; text-align: center; }
   section.block { padding: 4rem 0; }
   .voice-picker { padding: 1.75rem 1.25rem 1.5rem; }
   .voice-tabs { gap: 0.2rem; padding: 0.25rem; }
@@ -449,13 +537,33 @@ footer .copyright {
   .voice-tab .tab-eyebrow { font-size: 0.5rem; letter-spacing: 0.16em; }
   .pricing-card { padding: 2.5rem 1.75rem; }
   .pricing-card .price { font-size: 3.5rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
   footer .container.top-row { flex-direction: column; align-items: stretch; }
   nav.top a { font-size: 0.65rem; letter-spacing: 0.14em; }
   nav.top .wordmark { font-size: 0.9rem; }
 }
+@media (max-width: 420px) {
+  nav.top .container { padding-left: 3rem; padding-right: 0.85rem; }
+  nav.top .wordmark { padding-right: 2.2rem; }
+  nav.top .right { justify-content: flex-start; }
+  nav.top a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  nav.top .buy { margin-left: auto; }
+  .hero { padding-top: 2.2rem; }
+  .hero-meta { grid-template-columns: repeat(2, 1fr); row-gap: 1rem; }
+  .voice-tabs { grid-template-columns: 1fr; }
+  .player-row { align-items: flex-start; }
+  .pricing-card { padding: 2.1rem 1.15rem; }
+}
 </style>
 </head>
 <body>
+<a class="home-link" href="/" aria-label="Back to Stoic Meditations home">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 5l8 6.5"></path>
+    <path d="M6.5 10.5V19h11v-8.5"></path>
+    <path d="M10 19v-5h4v5"></path>
+  </svg>
+</a>
 
 <!-- ===== Top nav ===== -->
 <nav class="top">
@@ -475,7 +583,7 @@ footer .copyright {
   <div class="container hero-grid">
     <!-- Cover image fills the showcase box edge-to-edge -->
     <div class="audio-showcase" aria-label="Audiobook cover">
-      <img src="cover.png" alt="14 Days to a Stoic Mind audiobook cover" class="cover-image">
+      <img src="/audio/cover.png" alt="14 Days to a Stoic Mind audiobook cover" class="cover-image">
     </div>
 
     <div class="hero-copy">
@@ -491,7 +599,7 @@ footer .copyright {
       </div>
 
       <div class="cta-row">
-        <a class="btn-primary" href="#pricing">Get the audiobook <span class="price">· $10</span></a>
+        <a class="btn-primary" href="#pricing">Get the audiobook <span class="price">· $9.99</span></a>
         <a class="btn-secondary" href="#listen">Sample the voices</a>
       </div>
     </div>
@@ -507,15 +615,15 @@ footer .copyright {
 
     <div class="voice-picker">
       <div class="voice-tabs" role="tablist" aria-label="Choose a narrator">
-        <button class="voice-tab active" role="tab" data-voice="am_michael" data-src="samples/am_michael.mp3">
+        <button class="voice-tab active" role="tab" data-voice="am_michael" data-src="/audio/samples/am_michael.mp3">
           <span class="tab-eyebrow">American Male</span>
           <span class="tab-name">Michael</span>
         </button>
-        <button class="voice-tab" role="tab" data-voice="af_heart" data-src="samples/af_heart.mp3">
+        <button class="voice-tab" role="tab" data-voice="af_heart" data-src="/audio/samples/af_heart.mp3">
           <span class="tab-eyebrow">American Female</span>
           <span class="tab-name">Heart</span>
         </button>
-        <button class="voice-tab" role="tab" data-voice="bm_george" data-src="samples/bm_george.mp3">
+        <button class="voice-tab" role="tab" data-voice="bm_george" data-src="/audio/samples/bm_george.mp3">
           <span class="tab-eyebrow">British Male</span>
           <span class="tab-name">George</span>
         </button>
@@ -540,7 +648,7 @@ footer .copyright {
 
       <div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
 
-      <audio id="sampleAudio" preload="auto" src="samples/am_michael.mp3"></audio>
+      <audio id="sampleAudio" preload="auto" src="/audio/samples/am_michael.mp3"></audio>
     </div>
   </div>
 </section>
@@ -605,21 +713,41 @@ footer .copyright {
     <h2 class="section-title">One price. All three voices.</h2>
     <p class="section-sub">No subscription, no expiration, no upsell. Pay once, download all three narrations, listen on any device, return any time.</p>
 
-    <div class="pricing-card">
-      <div class="price">$10</div>
-      <div class="price-sub">Instant Download</div>
-      <ul>
-        <li>3 chapter-marked M4B audiobooks (one per voice)</li>
-        <li>42 individual MP3 chapters across the three voices</li>
-        <li>98 minutes of audio per voice, 14 chapters each</li>
-        <li>Plays on Apple Books, Audible-compatible players, podcast apps</li>
-      </ul>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="price">$9.99</div>
+        <div class="price-sub">Audiobook Only</div>
+        <ul>
+          <li>3 chapter-marked M4B audiobooks (one per voice)</li>
+          <li>42 individual MP3 chapters across the three voices</li>
+          <li>98 minutes of audio per voice, 14 chapters each</li>
+          <li>Plays on Apple Books, Audible-compatible players, podcast apps</li>
+        </ul>
 
-      <form class="pricing-form" id="buyForm">
-        <input type="email" name="email" placeholder="Your email, where we will send the files" required autocomplete="email">
-        <button type="submit">Get the audiobook · $10</button>
-      </form>
-      <div class="form-fineprint">Secure checkout via Gumroad · Files delivered to your inbox</div>
+        <form class="pricing-form" id="buyForm" data-razorpay-product="audiobook">
+          <input type="email" name="email" placeholder="Your email, where we will send the files" required autocomplete="email">
+          <button type="submit">Get the audiobook · $9.99</button>
+        </form>
+        <div class="form-fineprint">Secure checkout via Razorpay · Files emailed after payment</div>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="compare-price"><s>$34.99 separately</s></div>
+        <div class="price">$20</div>
+        <div class="price-sub">Complete Pack</div>
+        <ul>
+          <li><a href="/book">Book PDF</a> included</li>
+          <li>Audiobook with all three voices</li>
+          <li><a href="/wallpapers">All three wallpaper bundles</a></li>
+          <li>One checkout, all downloads on the thank-you page</li>
+        </ul>
+
+        <form class="pricing-form" id="completePackForm" data-razorpay-product="complete_pack">
+          <input type="email" name="email" placeholder="Your email, where we will send the pack" required autocomplete="email">
+          <button type="submit">Get the complete pack · $20</button>
+        </form>
+        <div class="form-fineprint">Save $14.99 · Best value</div>
+      </div>
     </div>
   </div>
 </section>
@@ -632,10 +760,11 @@ footer .copyright {
       <div class="meta">Published by @stoicismwidget</div>
     </div>
     <div class="right">
+      <a href="/">Home</a>
       <a href="https://instagram.com/stoicismwidget" target="_blank">Instagram</a>
       <a href="#listen">Sample</a>
       <a href="#voices">Masters</a>
-      <a href="#pricing">Buy · $10</a>
+      <a href="#pricing">Buy · $9.99</a>
     </div>
   </div>
   <div class="container">
@@ -681,19 +810,10 @@ footer .copyright {
     progressBar.style.width = (audio.currentTime / audio.duration * 100) + '%';
   });
 
-  // ----- Buy form (collects email for delivery) -----
-  // TODO: Wire to Gumroad or Stripe Checkout. For now, capture the email and inform the user.
-  const buyForm = document.getElementById('buyForm');
-  buyForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const email = buyForm.querySelector('input[type=email]').value.trim();
-    if (!email) return;
-    sessionStorage.setItem('pending_audiobook_buyer_email', email);
-    console.log('[purchase] audiobook buyer email captured:', email);
-    alert('Checkout is not yet wired up. Email saved.');
-  });
 })();
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="/assets/razorpay-checkout.js"></script>
 
 </body>
 </html>
