@@ -90,7 +90,8 @@
       '.rzp-breakdown.visible{display:block}',
       '.rzp-row{display:flex;justify-content:space-between;gap:1rem;padding:.28rem 0;color:#5e5144}',
       '.rzp-row.total{color:#1c1a17;font-weight:700;border-top:1px dotted #c8bda7;margin-top:.35rem;padding-top:.55rem}',
-      '.rzp-status{min-height:1.25rem;margin-top:.7rem;text-align:center;color:#6b4d2a;font-style:italic}'
+      '.rzp-status{min-height:1.25rem;margin-top:.7rem;text-align:center;color:#6b4d2a;font-style:italic}',
+      '.rzp-fineprint{margin-top:.7rem;text-align:center;font-size:.72rem;letter-spacing:.04em;color:#8a7c69;font-style:italic;line-height:1.4}'
     ].join('');
     document.head.appendChild(style);
 
@@ -107,13 +108,14 @@
           '<select name="declared_country" required autocomplete="country">' + countryOptionsHtml() + '</select>' +
           '<select name="declared_state_region_select" hidden disabled></select>' +
           '<input type="text" name="declared_state_region" placeholder="State / region (optional)" hidden disabled>' +
-          '<label class="rzp-consent"><input type="checkbox" name="consent" required> <span>I confirm my billing country is accurate and understand this purchase is for a digital ebook.</span></label>' +
+          '<label class="rzp-consent"><input type="checkbox" name="consent" required> <span>I confirm my billing country is accurate and understand this is a digital product — all sales are final and non-refundable.</span></label>' +
         '</div>' +
         '<div class="rzp-actions">' +
           '<button class="rzp-secondary" type="button" data-rzp-close>Cancel</button>' +
           '<button class="rzp-primary" type="submit" id="rzpPrimary">Continue</button>' +
         '</div>' +
         '<div class="rzp-status" id="rzpStatus"></div>' +
+        '<div class="rzp-fineprint">Digital download. No refunds, returns, or exchanges once purchased.</div>' +
       '</form>';
     document.body.appendChild(modal);
 
