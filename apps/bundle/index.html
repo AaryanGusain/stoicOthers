@@ -116,16 +116,36 @@ h1 {
   gap: 0.8rem;
 }
 .item {
+  position: relative;
   border: 1px solid rgba(107, 77, 42, 0.2);
   background: rgba(246, 241, 231, 0.5);
-  padding: 1rem;
+  padding: 1rem 2.4rem 1rem 1rem;
   text-decoration: none;
   color: var(--ink);
-  transition: border-color 0.15s ease, transform 0.12s ease;
+  display: block;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 .item:hover {
   border-color: var(--accent);
   transform: translateY(-1px);
+  background: rgba(246, 241, 231, 0.85);
+  box-shadow: 0 8px 22px -16px rgba(0, 0, 0, 0.35);
+}
+.item .arrow {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.15rem;
+  color: var(--accent);
+  transition: transform 0.18s ease, color 0.15s ease;
+  line-height: 1;
+}
+.item:hover .arrow {
+  transform: translateY(-50%) translateX(4px);
+  color: var(--ink);
 }
 .item .label {
   font-family: 'Inter Tight', sans-serif;
@@ -250,16 +270,19 @@ button:hover { background: var(--gold); }
         <div class="label">The Reader</div>
         <h2>14 Days to a Stoic Mind</h2>
         <p>The complete book as a downloadable PDF.</p>
+        <span class="arrow" aria-hidden="true">→</span>
       </a>
       <a class="item" href="/audio">
         <div class="label">The Audiobook</div>
         <h2>All Three Voices</h2>
         <p>Chapter-marked M4B editions for each narration.</p>
+        <span class="arrow" aria-hidden="true">→</span>
       </a>
       <a class="item" href="/wallpapers">
         <div class="label">Wallpapers</div>
         <h2>Three Visual Bundles</h2>
         <p>Strength, solitude, and wisdom sets for phone, tablet, and desktop.</p>
+        <span class="arrow" aria-hidden="true">→</span>
       </a>
     </div>
 
