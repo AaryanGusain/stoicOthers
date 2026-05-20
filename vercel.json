@@ -9,11 +9,11 @@
     },
     {
       "source": "/admin",
-      "destination": "/apps/admin/index.html"
+      "destination": "/apps/admin"
     },
     {
       "source": "/book",
-      "destination": "/apps/book/index.html"
+      "destination": "/apps/book"
     },
     {
       "source": "/book/(.*)",
@@ -21,7 +21,7 @@
     },
     {
       "source": "/audio",
-      "destination": "/apps/audiobook/index.html"
+      "destination": "/apps/audiobook"
     },
     {
       "source": "/audio/(.*)",
@@ -29,7 +29,7 @@
     },
     {
       "source": "/wallpapers",
-      "destination": "/apps/wallpapers/index.html"
+      "destination": "/apps/wallpapers"
     },
     {
       "source": "/wallpapers/(.*)",
@@ -37,11 +37,11 @@
     },
     {
       "source": "/bundle",
-      "destination": "/apps/bundle/index.html"
+      "destination": "/apps/bundle"
     },
     {
       "source": "/thank-you",
-      "destination": "/apps/thank-you/index.html"
+      "destination": "/apps/thank-you"
     },
     {
       "source": "/(.*)",
