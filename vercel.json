@@ -50,6 +50,14 @@
       "destination": "/apps/thank-you"
     },
     {
+      "source": "/privacy",
+      "destination": "/apps/privacy"
+    },
+    {
+      "source": "/terms",
+      "destination": "/apps/terms"
+    },
+    {
       "source": "/(.*)",
       "destination": "/apps/main/$1"
     }
