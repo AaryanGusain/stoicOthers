@@ -24,6 +24,12 @@
     return (root || document).querySelector(selector);
   }
 
+  function track(name, data) {
+    try {
+      if (window.va) window.va('event', { name: name, data: data || {} });
+    } catch (err) { /* analytics must never break checkout */ }
+  }
+
   function escapeHtml(value) {
     return String(value || '').replace(/[&<>"']/g, function (char) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
@@ -133,6 +139,7 @@
   }
 
   function openModal(product, email) {
+    track('Checkout Started', { product: product });
     activeProduct = product;
     activeEmail = email || '';
     activeCheckoutData = null;
@@ -310,6 +317,7 @@
             });
           })
           .then(function (verifyData) {
+            track('Purchase Completed', { product: activeProduct, currency: data.currency });
             window.location.href = '/thank-you?order_id=' + encodeURIComponent(verifyData.local_order_id || data.local_order_id);
           })
           .catch(function () {

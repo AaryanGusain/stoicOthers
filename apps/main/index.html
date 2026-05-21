@@ -514,9 +514,8 @@ footer .dot { opacity: 0.5; }
 }
 </style>
 
-<!-- Vercel Analytics + Speed Insights -->
+<!-- Vercel Web Analytics (page views + custom events) -->
 <script defer src="/_vercel/insights/script.js"></script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
@@ -657,7 +656,7 @@ footer .dot { opacity: 0.5; }
       <div class="includes-row"><span class="check">✦</span><span><b>Three wallpaper bundles</b> — 60 designs</span></div>
     </div>
 
-    <a class="cta" href="/bundle">Claim the Complete Pack →</a>
+    <a class="cta" href="/bundle" id="bundleOfferCta">Claim the Complete Pack →</a>
     <button type="button" class="dismiss" id="bundleOfferDismiss">No thanks · just the lessons</button>
   </div>
 </div>
@@ -672,11 +671,18 @@ footer .dot { opacity: 0.5; }
   const emailInput = subForm.querySelector('input[type=email]');
   const offerOverlay = document.getElementById('bundleOffer');
 
+  function track(name, data) {
+    try {
+      if (window.va) window.va('event', { name: name, data: data || {} });
+    } catch (err) { /* analytics must never break the page */ }
+  }
+
   function showBundleOffer() {
     if (!offerOverlay || localStorage.getItem(OFFER_KEY)) return;
     offerOverlay.hidden = false;
     offerOverlay.classList.add('visible');
     document.body.style.overflow = 'hidden';
+    track('Bundle Offer Shown');
   }
   function hideBundleOffer() {
     if (!offerOverlay) return;
@@ -686,13 +692,29 @@ footer .dot { opacity: 0.5; }
     localStorage.setItem(OFFER_KEY, '1');
   }
   if (offerOverlay) {
-    document.getElementById('bundleOfferClose').addEventListener('click', hideBundleOffer);
-    document.getElementById('bundleOfferDismiss').addEventListener('click', hideBundleOffer);
+    document.getElementById('bundleOfferClose').addEventListener('click', function () {
+      track('Bundle Offer Dismissed', { via: 'close' });
+      hideBundleOffer();
+    });
+    document.getElementById('bundleOfferDismiss').addEventListener('click', function () {
+      track('Bundle Offer Dismissed', { via: 'no-thanks' });
+      hideBundleOffer();
+    });
+    document.getElementById('bundleOfferCta').addEventListener('click', function () {
+      track('Bundle Offer Clicked');
+      localStorage.setItem(OFFER_KEY, '1');
+    });
     offerOverlay.addEventListener('click', function (e) {
-      if (e.target === offerOverlay) hideBundleOffer();
+      if (e.target === offerOverlay) {
+        track('Bundle Offer Dismissed', { via: 'backdrop' });
+        hideBundleOffer();
+      }
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && offerOverlay.classList.contains('visible')) hideBundleOffer();
+      if (e.key === 'Escape' && offerOverlay.classList.contains('visible')) {
+        track('Bundle Offer Dismissed', { via: 'escape' });
+        hideBundleOffer();
+      }
     });
   }
 
@@ -718,6 +740,7 @@ footer .dot { opacity: 0.5; }
         if (!response.ok) throw new Error('Could not send lessons');
         localStorage.setItem(SUB_KEY, 'subscribed:' + email);
         subSection.classList.add('submitted');
+        track('Lessons Signup');
         setTimeout(showBundleOffer, 700);
       })
       .catch(function () {
