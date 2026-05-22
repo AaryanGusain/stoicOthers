@@ -59,7 +59,7 @@
     },
     {
       "source": "/support",
-      "destination": "/apps/support/index.html"
+      "destination": "/apps/support"
     },
     {
       "source": "/(.*)",
