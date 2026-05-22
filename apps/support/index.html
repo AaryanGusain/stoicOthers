@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Stoic Widgets & Stoic Meditations</title>
+  <meta name="description" content="Get help with Stoic Widgets iOS app and Stoic Meditations. Ask questions, report bugs, or share feedback — we're here to help." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0c0f;
+      --surface:   #13151a;
+      --border:    rgba(255,255,255,0.07);
+      --gold:      #c9a96e;
+      --gold-light:#e8c98a;
+      --text:      #e8e4dd;
+      --muted:     #7a7771;
+      --radius:    16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Ambient glow ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 10%, rgba(201,169,110,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 35% at 80% 85%, rgba(100,120,180,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(11,12,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--gold), #8b6c42);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .nav-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-badge {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.3);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 100px 24px 64px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Product tabs ── */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 48px 24px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tab-btn {
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(201,169,110,0.4);
+      color: var(--gold);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(201,169,110,0.05));
+      border-color: rgba(201,169,110,0.5);
+      color: var(--gold-light);
+    }
+
+    /* ── Main grid ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 100px;
+    }
+
+    /* ── FAQ ── */
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 72px;
+    }
+
+    @media (max-width: 700px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+
+    .faq-item:hover { border-color: rgba(201,169,110,0.2); }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 22px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      line-height: 1.4;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    .faq-answer p {
+      padding: 0 24px 22px;
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* ── Contact form ── */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 760px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .contact-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .contact-info p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--gold); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    /* ── Form ── */
+    form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease;
+      width: 100%;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(122,119,113,0.6); }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: rgba(201,169,110,0.5);
+      background: rgba(201,169,110,0.04);
+    }
+
+    .field select option { background: #1a1c22; }
+
+    .field textarea { resize: vertical; min-height: 130px; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold), #8b6c42);
+      color: #0b0c0f;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* ── Success state ── */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .success-msg.show { display: block; }
+
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .success-msg h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    .success-msg p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Fade-in animation ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate { animation: fadeUp 0.6s ease both; }
+    .animate-d1 { animation-delay: 0.1s; }
+    .animate-d2 { animation-delay: 0.2s; }
+    .animate-d3 { animation-delay: 0.3s; }
+    .animate-d4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">🜚</div>
+    <span class="nav-title">Stoic Studio</span>
+  </a>
+  <span class="nav-badge">Support</span>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <span class="hero-eyebrow animate animate-d1">Help Center</span>
+  <h1 class="animate animate-d2">We're here to<br/><em>help you</em></h1>
+  <p class="animate animate-d3">
+    Questions about <strong style="color:var(--text)">Stoic Widgets</strong> or <strong style="color:var(--text)">Stoic Meditations</strong>? 
+    Ask away — we read every message and reply personally.
+  </p>
+</section>
+
+<!-- ── Product tabs ── -->
+<div class="tabs animate animate-d4">
+  <button class="tab-btn active" id="tab-all" onclick="filterFAQ('all')">All Topics</button>
+  <button class="tab-btn" id="tab-widgets" onclick="filterFAQ('widgets')">Stoic Widgets</button>
+  <button class="tab-btn" id="tab-meditations" onclick="filterFAQ('meditations')">Stoic Meditations</button>
+</div>
+
+<!-- ── Main ── -->
+<main>
+
+  <!-- FAQ -->
+  <p class="section-label">Frequently Asked</p>
+  <div class="faq-grid" id="faq-grid">
+
+    <!-- Widgets FAQs -->
+    <div class="faq-item" data-product="widgets">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-1">
+        How do I add the Stoic Widget to my home screen?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Long-press on your home screen → tap the <strong>+</strong> in the top left corner → search for "Stoic Widgets" → choose your preferred size and tap <em>Add Widget</em>.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="widgets">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-2">
+        Can I customise the widget theme or font?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Yes! Open the app, go to <em>Themes</em>, and pick from dozens of curated backgrounds and colour palettes. Long-press the widget and tap <em>Edit Widget</em> to switch themes directly.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="widgets">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-3">
+        The widget isn't updating — what should I do?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>iOS throttles widget refreshes to preserve battery. Try: remove and re-add the widget, or go to <em>Settings → Stoic Widgets → Background App Refresh</em> and make sure it's enabled.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="widgets">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-4">
+        How do I restore my premium purchase?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Open the app → <em>Settings → Restore Purchases</em>. Make sure you're signed into the same Apple ID used for the original purchase. If the issue persists, contact us below.</p>
+      </div>
+    </div>
+
+    <!-- Meditations FAQs -->
+    <div class="faq-item" data-product="meditations">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-5">
+        What is Stoic Meditations?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Stoic Meditations is a curated site featuring daily readings, reflections, and writings inspired by Marcus Aurelius, Epictetus, and Seneca — designed to bring ancient wisdom into modern life.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="meditations">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-6">
+        How do I join the email list or waitlist?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Visit the homepage and enter your email in the waitlist box. You'll receive a confirmation — check your spam folder if you don't see it within a minute.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="meditations">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-7">
+        Can I submit a quote or suggest content?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Absolutely. Use the contact form below, select <em>"Content Suggestion"</em> as your topic, and paste your quote or idea. We consider all genuine submissions.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-product="all">
+      <button class="faq-question" onclick="toggleFAQ(this)" id="faq-8">
+        How long does it take to get a reply?
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-answer">
+        <p>Usually within 24–48 hours. We're a small, indie team, so every message is read by a real person. Your patience and kind words genuinely mean a lot.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Contact form -->
+  <div class="contact-wrapper">
+
+    <div class="contact-info">
+      <p class="section-label">Get In Touch</p>
+      <h2>Still have<br/>a question?</h2>
+      <p>
+        Fill out the form and we'll get back to you as soon as we can. No bots, no ticket queues — just a real reply.
+      </p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:aaryangusain134@gmail.com" id="email-link">
+          <div class="contact-link-icon">✉️</div>
+          <span>aaryangusain134@gmail.com</span>
+        </a>
+        <a class="contact-link" href="https://instagram.com" target="_blank" id="instagram-link">
+          <div class="contact-link-icon">📸</div>
+          <span>Instagram DMs welcome</span>
+        </a>
+        <a class="contact-link" href="#" id="response-info">
+          <div class="contact-link-icon">🕐</div>
+          <span>Replies within 24–48 hrs</span>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <form id="support-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Marcus A." required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="product">Regarding</label>
+          <select id="product" name="product">
+            <option value="">Select a product…</option>
+            <option value="stoic-widgets">🧩 Stoic Widgets (iOS App)</option>
+            <option value="stoic-meditations">📖 Stoic Meditations (Website)</option>
+            <option value="both">Both</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option value="">Select a topic…</option>
+            <option value="bug">🐛 Bug Report</option>
+            <option value="purchase">💳 Purchase / Billing</option>
+            <option value="feature">✨ Feature Request</option>
+            <option value="content">📝 Content Suggestion</option>
+            <option value="general">💬 General Question</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Send Message →</button>
+      </form>
+
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">🜚</div>
+        <h3>Message received.</h3>
+        <p>Thank you for reaching out. We'll reply to your email within 24–48 hours.<br/>
+        <em>"Begin at once to live, and count each separate day as a separate life."</em></p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+  © 2025 Stoic Studio &nbsp;·&nbsp;
+  <a href="mailto:aaryangusain134@gmail.com">aaryangusain134@gmail.com</a>
+  &nbsp;·&nbsp; Made with quiet intention.
+</footer>
+
+<script>
+  /* ── FAQ toggle ── */
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── Tab filter ── */
+  function filterFAQ(product) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + product).classList.add('active');
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const p = item.dataset.product;
+      const show = product === 'all' || p === product || p === 'all';
+      item.style.display = show ? '' : 'none';
+      if (!show) item.classList.remove('open');
+    });
+  }
+
+  /* ── Form submit (mailto fallback) ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const product = document.getElementById('product').value;
+    const topic   = document.getElementById('topic').value;
+    const message = document.getElementById('message').value.trim();
+
+    const subject = encodeURIComponent(`[Stoic Support] ${topic || 'Question'} – ${product || 'General'}`);
+    const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProduct: ${product}\nTopic: ${topic}\n\nMessage:\n${message}`);
+
+    window.location.href = `mailto:aaryangusain134@gmail.com?subject=${subject}&body=${body}`;
+
+    /* Show success after short delay */
+    setTimeout(() => {
+      document.getElementById('support-form').style.display = 'none';
+      document.getElementById('success-msg').classList.add('show');
+    }, 600);
+  }
+
+  /* ── Animate on scroll ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('animate'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.faq-item, .contact-wrapper').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

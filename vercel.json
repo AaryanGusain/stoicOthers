@@ -58,6 +58,10 @@
       "destination": "/apps/terms"
     },
     {
+      "source": "/support",
+      "destination": "/apps/support/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/apps/main/$1"
     }
