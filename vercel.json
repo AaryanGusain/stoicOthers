@@ -54,12 +54,28 @@
       "destination": "/apps/privacy"
     },
     {
+      "source": "/deleteaccount",
+      "destination": "/apps/delete-account"
+    },
+    {
+      "source": "/delete-account",
+      "destination": "/apps/delete-account"
+    },
+    {
       "source": "/terms",
       "destination": "/apps/terms"
     },
     {
       "source": "/support",
       "destination": "/apps/support"
+    },
+    {
+      "source": "/conversion",
+      "destination": "/apps/conversion"
+    },
+    {
+      "source": "/conversion/(.*)",
+      "destination": "/apps/conversion/$1"
     },
     {
       "source": "/(.*)",

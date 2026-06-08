@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stoic Widgets — Daily Wisdom on Your Lock Screen</title>
+<meta name="description" content="Stoic Widgets puts one Stoic quote a day on your iPhone Lock Screen and Home Screen. Free on the App Store. Daily wisdom, made effortless.">
+<link rel="canonical" href="https://stoicmeditations.site/">
+
+<!-- Social share -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stoic Widgets — Daily Wisdom on Your Lock Screen">
+<meta property="og:description" content="One Stoic line a day, on the screens you already look at. Free on the App Store.">
+<meta property="og:image" content="/conversion/assets/app-hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="theme-color" content="#f6f1e7">
+<link rel="icon" type="image/png" href="/conversion/assets/app-icon.png">
+<link rel="apple-touch-icon" href="/conversion/assets/app-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-deep:#ede5d3;
+    --paper-warm:#f0e9d8;
+    --ink:#1c1a17;
+    --accent:#6b4d2a;
+    --gold:#c9a253;
+    --muted:#75695b;
+    --rule:#d8cdb8;
+    --maxw:480px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    background:
+      radial-gradient(120% 70% at 50% 0%, var(--paper-warm) 0%, var(--paper) 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter Tight',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    min-height:100vh;
+    min-height:100svh;
+    padding:env(safe-area-inset-top) 20px calc(env(safe-area-inset-bottom) + 8px);
+  }
+
+  .wrap{
+    width:100%;
+    max-width:var(--maxw);
+    margin:0 auto;
+    animation:fadeIn .6s ease-out both;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.wrap{animation:none;}}
+
+  /* ---- top brand bar ---- */
+  .topbar{
+    display:flex;align-items:center;gap:10px;
+    padding:18px 2px 4px;
+  }
+  .topbar img{width:30px;height:30px;border-radius:7px;box-shadow:0 1px 3px rgba(28,26,23,.18);}
+  .topbar span{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:600;font-size:19px;letter-spacing:.2px;
+  }
+
+  /* ---- hero ---- */
+  .hero{text-align:center;padding:26px 0 8px;}
+  .appicon{
+    width:92px;height:92px;border-radius:21px;
+    box-shadow:0 10px 30px rgba(28,26,23,.22), 0 2px 6px rgba(28,26,23,.14);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:700;
+    font-size:clamp(34px,9vw,44px);
+    line-height:1.05;
+    letter-spacing:.3px;
+  }
+  .tag{
+    color:var(--muted);
+    font-size:clamp(16px,4.4vw,18px);
+    margin:12px auto 0;
+    max-width:21em;
+  }
+
+  .rating{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:6px 8px;
+    margin-top:16px;
+    font-size:13px;color:var(--muted);
+    letter-spacing:.3px;
+  }
+  .stars{color:var(--gold);letter-spacing:2px;font-size:14px;}
+  .dot{opacity:.5;}
+
+  /* ---- App Store button ---- */
+  .cta{
+    display:inline-block;
+    margin-top:22px;
+    border-radius:13px;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 6px 18px rgba(28,26,23,.18);
+  }
+  .cta img{display:block;height:58px;width:auto;border-radius:13px;}
+  .cta:active{transform:scale(.97);}
+  @media(hover:hover){.cta:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(28,26,23,.24);}}
+
+  .microtrust{
+    margin-top:12px;
+    font-size:12.5px;
+    color:var(--muted);
+    letter-spacing:.2px;
+  }
+
+  /* ---- device shot ---- */
+  .device{margin:30px auto 6px;max-width:330px;}
+  .device img{
+    width:100%;height:auto;display:block;
+    border-radius:26px;
+    box-shadow:0 22px 50px rgba(28,26,23,.30);
+  }
+
+  /* ---- features ---- */
+  .features{
+    margin:34px 0 6px;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    padding:8px 0;
+  }
+  .feat{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:16px 4px;
+  }
+  .feat + .feat{border-top:1px solid var(--rule);}
+  .feat .ico{
+    flex:0 0 38px;height:38px;width:38px;border-radius:10px;
+    background:var(--paper-deep);
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+  }
+  .feat h3{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:600;font-size:20px;line-height:1.15;
+  }
+  .feat p{color:var(--muted);font-size:14.5px;margin-top:3px;}
+
+  /* ---- closing ---- */
+  .closing{text-align:center;padding:34px 0 14px;}
+  .closing h2{
+    font-family:'Cormorant Garamond',Garamond,serif;
+    font-weight:600;font-style:italic;
+    font-size:clamp(23px,6.5vw,28px);
+    color:var(--accent);
+  }
+
+  /* ---- footer ---- */
+  footer{
+    text-align:center;
+    padding:26px 0 10px;
+    border-top:1px solid var(--rule);
+    margin-top:18px;
+  }
+  footer p{font-size:12.5px;color:var(--muted);letter-spacing:.2px;line-height:1.7;}
+  footer a{color:var(--accent);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+</style>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="topbar">
+      <img src="/conversion/assets/app-icon.png" alt="Stoic Widgets app icon">
+      <span>Stoic Widgets</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <img class="appicon" src="/conversion/assets/app-icon.png" alt="Stoic Widgets app icon" width="92" height="92">
+        <h1>Stoic Widgets</h1>
+        <p class="tag">One Stoic line a day, on the screens you already look at.</p>
+
+        <div class="rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>5.0 on the App Store</span>
+          <span class="dot">·</span>
+          <span>Lifestyle</span>
+        </div>
+
+        <div>
+          <a class="cta" href="https://apps.apple.com/us/app/stoic-widgets-daily-wisdom/id6769972958"
+             aria-label="Download Stoic Widgets on the App Store" onclick="window.va('event', { name: 'AppStoreDownloadClick_Conversion' })">
+            <img src="/conversion/assets/app-store-badge.svg" alt="Download on the App Store">
+          </a>
+        </div>
+        <p class="microtrust">Free on the App Store · iPhone &amp; iPad · Requires iOS 15.1+</p>
+
+        <figure class="device">
+          <img src="/conversion/assets/app-hero.png" alt="Stoic Widgets shown on an iPhone Home Screen, with a daily quote widget reading: The man who needs the approval does not yet own his direction.">
+        </figure>
+      </section>
+
+      <section class="features" aria-label="What you get">
+        <div class="feat">
+          <div class="ico" aria-hidden="true">🔒</div>
+          <div>
+            <h3>On your Lock Screen</h3>
+            <p>Your daily quote lives on the Lock Screen and Home Screen. Nothing to open. It comes to you.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ico" aria-hidden="true">📜</div>
+          <div>
+            <h3>A library to scroll</h3>
+            <p>Scroll a library of Stoic quotes, one per screen. Tap any line to save it for later.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="ico" aria-hidden="true">🕊️</div>
+          <div>
+            <h3>No pressure, ever</h3>
+            <p>No streaks, no badges, no gamification. It never shames you for a missed day.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <h2>Daily wisdom, made effortless.</h2>
+        <a class="cta" href="https://apps.apple.com/us/app/stoic-widgets-daily-wisdom/id6769972958"
+           aria-label="Download Stoic Widgets on the App Store" onclick="window.va('event', { name: 'AppStoreDownloadClick_Conversion' })">
+          <img src="/conversion/assets/app-store-badge.svg" alt="Download on the App Store">
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        © 2026 Stoic Widgets · <a href="https://stoicmeditations.site">stoicmeditations.site</a><br>
+        Made for people who want one good line a day.
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
