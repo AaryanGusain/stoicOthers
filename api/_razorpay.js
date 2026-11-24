@@ -51,6 +51,24 @@ function fetchPayment(paymentId) {
   return razorpayRequest(`/payments/${encodeURIComponent(paymentId)}`);
 }
 
+function createRazorpaySubscription(payload) {
+  return razorpayRequest('/subscriptions', {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+}
+
+function fetchRazorpaySubscription(subscriptionId) {
+  return razorpayRequest(`/subscriptions/${encodeURIComponent(subscriptionId)}`);
+}
+
+function cancelRazorpaySubscription(subscriptionId, cancelAtCycleEnd = true) {
+  return razorpayRequest(`/subscriptions/${encodeURIComponent(subscriptionId)}/cancel`, {
+    method: 'POST',
+    body: JSON.stringify({ cancel_at_cycle_end: cancelAtCycleEnd ? 1 : 0 })
+  });
+}
+
 function hmacSha256(input, secret) {
   return crypto.createHmac('sha256', secret).update(input).digest('hex');
 }
@@ -68,6 +86,15 @@ function verifyCheckoutSignature({ orderId, paymentId, signature }) {
   return safeCompare(expected, signature);
 }
 
+function verifySubscriptionCheckoutSignature({ subscriptionId, paymentId, signature }) {
+  if (!process.env.RAZORPAY_KEY_SECRET) return false;
+  const expected = hmacSha256(
+    `${paymentId}|${subscriptionId}`,
+    process.env.RAZORPAY_KEY_SECRET
+  );
+  return safeCompare(expected, signature);
+}
+
 function verifyWebhookSignature(rawBody, signature) {
   if (!process.env.RAZORPAY_WEBHOOK_SECRET) return false;
   const expected = hmacSha256(rawBody, process.env.RAZORPAY_WEBHOOK_SECRET);
@@ -76,7 +103,11 @@ function verifyWebhookSignature(rawBody, signature) {
 
 module.exports = {
   createRazorpayOrder,
+  createRazorpaySubscription,
+  fetchRazorpaySubscription,
+  cancelRazorpaySubscription,
   fetchPayment,
   verifyCheckoutSignature,
+  verifySubscriptionCheckoutSignature,
   verifyWebhookSignature
 };

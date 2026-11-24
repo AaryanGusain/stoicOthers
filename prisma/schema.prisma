@@ -23,6 +23,23 @@ enum DeliveryStatus {
   skipped
 }
 
+enum WebSubscriptionPlan {
+  weekly
+  annual
+}
+
+enum WebSubscriptionStatus {
+  created
+  authenticated
+  active
+  past_due
+  halted
+  cancelled
+  completed
+  expired
+  refunded
+}
+
 model Subscriber {
   id              String   @id @default(cuid())
   email           String   @unique
@@ -204,4 +221,82 @@ model MonthlySummary {
   createdAt                DateTime @default(now()) @map("created_at")
 
   @@map("monthly_summaries")
+}
+
+model WebLead {
+  id               String   @id @default(cuid())
+  email            String
+  sessionId        String   @unique @map("session_id")
+  marketingConsent Boolean  @default(false) @map("marketing_consent")
+  answersJson      Json?    @map("answers_json")
+  attributionJson  Json?    @map("attribution_json")
+  referrer         String?
+  ipAddress        String?  @map("ip_address")
+  ipCountry        String?  @map("ip_country")
+  userAgent        String?  @map("user_agent")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  subscriptions    WebSubscription[]
+
+  @@index([email])
+  @@index([createdAt])
+  @@map("web_leads")
+}
+
+model WebSubscription {
+  id                      String                @id @default(cuid())
+  leadId                  String?               @map("lead_id")
+  lead                    WebLead?              @relation(fields: [leadId], references: [id])
+  email                   String
+  plan                    WebSubscriptionPlan
+  status                  WebSubscriptionStatus @default(created)
+  amount                  Int
+  currency                String                @default("USD")
+  razorpayPlanId          String                @map("razorpay_plan_id")
+  razorpaySubscriptionId  String?               @unique @map("razorpay_subscription_id")
+  razorpayCustomerId      String?               @map("razorpay_customer_id")
+  latestPaymentId         String?               @map("latest_payment_id")
+  currentPeriodStart      DateTime?             @map("current_period_start")
+  currentPeriodEnd        DateTime?             @map("current_period_end")
+  cancelAtPeriodEnd       Boolean               @default(false) @map("cancel_at_period_end")
+  cancelledAt             DateTime?             @map("cancelled_at")
+  firebaseUid             String?               @map("firebase_uid")
+  revenueCatAppUserId     String?               @map("revenuecat_app_user_id")
+  claimTokenHash          String?               @unique @map("claim_token_hash")
+  claimTokenExpiresAt     DateTime?             @map("claim_token_expires_at")
+  claimedAt               DateTime?             @map("claimed_at")
+  manageTokenHash         String?               @unique @map("manage_token_hash")
+  manageTokenExpiresAt    DateTime?             @map("manage_token_expires_at")
+  entitlementGrantedUntil DateTime?             @map("entitlement_granted_until")
+  lastWebhookAt           DateTime?             @map("last_webhook_at")
+  rawPayloadJson          Json?                  @map("raw_payload_json")
+  createdAt               DateTime              @default(now()) @map("created_at")
+  updatedAt               DateTime              @updatedAt @map("updated_at")
+  payments                WebSubscriptionPayment[]
+
+  @@index([email])
+  @@index([firebaseUid])
+  @@index([status])
+  @@index([currentPeriodEnd])
+  @@map("web_subscriptions")
+}
+
+model WebSubscriptionPayment {
+  id                    String          @id @default(cuid())
+  webSubscriptionId     String          @map("web_subscription_id")
+  webSubscription       WebSubscription @relation(fields: [webSubscriptionId], references: [id])
+  razorpayPaymentId     String          @unique @map("razorpay_payment_id")
+  amount                Int
+  currency              String
+  status                String?
+  method                String?
+  captured              Boolean?
+  currentPeriodStart    DateTime?       @map("current_period_start")
+  currentPeriodEnd      DateTime?       @map("current_period_end")
+  rawPayloadJson        Json            @map("raw_payload_json")
+  createdAt             DateTime        @default(now()) @map("created_at")
+
+  @@index([webSubscriptionId])
+  @@index([createdAt])
+  @@map("web_subscription_payments")
 }

@@ -169,13 +169,13 @@ body {
   <div class="doc-header">
     <div class="eyebrow">Stoic Widgets</div>
     <h1>Privacy Policy</h1>
-    <div class="effective-date">Effective May 21, 2026</div>
+    <div class="effective-date">Effective November 24, 2026</div>
   </div>
 
   <div class="section">
     <h2>Overview</h2>
-    <p>Stoic Widgets is part of a family of related apps operated by the same developer, including Stoic Widgets, Dharma Widgets, and Buddhist Widgets. This policy explains what information the app handles, how that information is used, and what choices you have.</p>
-    <p>Stoic Widgets is designed to work offline first. Most app data is stored locally on your device unless you choose to sign in and use optional sync features.</p>
+    <p>Stoic Widgets is part of a family of related apps operated by WIDGET WORKS LLP, Bengaluru, Karnataka, India, including Stoic Widgets, Dharma Widgets, and Buddhist Widgets. This policy explains what information the app handles, how that information is used, and what choices you have.</p>
+    <p>Stoic Widgets is designed to work offline first for core features. App analytics events and session recordings may be sent to PostHog even if you do not sign in.</p>
   </div>
 
   <div class="section">
@@ -190,6 +190,9 @@ body {
       <li>reminder settings and streak data</li>
       <li>widget configuration and widget preferences</li>
       <li>subscription entitlement status needed to determine premium access</li>
+      <li>purchase email, web-funnel choices, and referral attribution when you use the web onboarding funnel</li>
+      <li>web subscription identifiers, billing status, renewal dates, and cancellation status</li>
+      <li>app interactions and session recordings, including typed text, screen images, and touch locations</li>
     </ul>
   </div>
 
@@ -202,8 +205,29 @@ body {
 
   <div class="section">
     <h2>Subscriptions</h2>
-    <p>Subscriptions, free trials, renewals, cancellations, and purchase restoration are handled through Apple and RevenueCat.</p>
-    <p>We do not receive your full payment card information. We only handle the subscription and entitlement information needed to determine whether premium features should be available in the app and widget.</p>
+    <p>App Store subscriptions, free trials, renewals, cancellations, and purchase restoration are handled through Apple and RevenueCat.</p>
+    <p>If you purchase annual or lifetime app access on the web, the payment provider or merchant of record identified at checkout handles payment authorization and payment-method information, and recurring charges for annual plans. This may be Paddle or Dodo Payments where offered; Razorpay handles existing Razorpay purchases. RevenueCat receives the purchase status and entitlement duration needed to make Stoic Widgets Pro available inside the app.</p>
+    <p>We do not receive or store your full payment card number. We store the purchase email, plan, payment and subscription identifiers, billing status, paid-through date, and account link needed to operate and support the subscription.</p>
+  </div>
+
+  <div class="section">
+    <h2>Web Funnel And Email</h2>
+    <p>The web onboarding funnel stores your selected answers, an anonymous funnel session identifier, referral parameters, and the email address you provide. These details are used to build your result, complete checkout, send activation and management links, and understand where the funnel needs improvement.</p>
+    <p>Transactional emails include receipts, activation links, payment-status notices, recovery links, and cancellation confirmations. Product notes are sent only when you separately select the optional marketing consent control.</p>
+  </div>
+
+  <div class="section">
+    <h2>Analytics And Session Replay</h2>
+    <p>We use PostHog and Vercel Analytics to understand web funnel screen views, selected actions, checkout outcomes, and technical performance. We also use PostHog in the Stoic Widgets app to understand app use and improve onboarding, paywalls, and reliability.</p>
+    <p>We record app onboarding and paywall visits and a sample of other app sessions. These recordings may be linked to an app session, device, or signed-in account identifier. They can include screen images, touch locations, text you type into app fields (including your name, email address, searches, and one-time sign-in codes), visible images and system views, console logs, and network activity metadata such as request URLs and status. Some operating-system or third-party screens may not be available to the recorder. We may use AI-assisted analysis of recordings to find where people hesitate or get stuck.</p>
+    <p>Web funnel event analytics and app session recordings are different data sources. App recordings can include an email address you type even when a web funnel event does not include it.</p>
+  </div>
+
+  <div class="section">
+    <h2>Reflect with Marc</h2>
+    <p>Reflect with Marc offers guided Stoic passages, explanations, and small practices that work on your device. You can also write one message a day to receive a personal reply.</p>
+    <p>The first time you write to Marc, the app asks for your permission in the chat before anything is sent. With your permission, the message you write is sent through our server (Firebase) to Anthropic, which generates the reply. Anthropic normally deletes API inputs and outputs within 30 days, with exceptions for safety and legal obligations. We do not store the text of your messages or replies on our servers; we keep only usage counters needed to limit requests.</p>
+    <p>Your conversation is saved on your device for up to 24 hours. Messages you write to Marc are excluded from session recordings. You can turn personal replies off, clear the conversation, or report a reply in Profile &rarr; Privacy &amp; Security.</p>
   </div>
 
   <div class="section">
@@ -225,6 +249,7 @@ body {
       <li>schedule and manage reminders you enable</li>
       <li>determine premium access and subscription status</li>
       <li>respond to support or privacy requests</li>
+      <li>analyze app use and recordings to improve onboarding, paywalls, and reliability</li>
     </ul>
   </div>
 
@@ -247,6 +272,10 @@ body {
       <li>Apple, for Sign in with Apple, App Store billing, subscriptions, and platform services</li>
       <li>RevenueCat, for subscription and entitlement management</li>
       <li>Firebase, for authentication and optional cloud sync</li>
+      <li>The provider shown at checkout (Paddle, Dodo Payments, or Razorpay), for payment processing, tax and billing administration, refunds, and fraud prevention</li>
+      <li>Resend, for transactional and consented product email</li>
+      <li>PostHog, for web and app analytics, session recordings, and replay analysis; Vercel, for web analytics, hosting, and technical operation of the web funnel</li>
+      <li>Anthropic, to generate the personal replies you choose to request in Reflect with Marc</li>
     </ul>
   </div>
 
@@ -254,7 +283,8 @@ body {
     <h2>Retention And Deletion</h2>
     <p>Locally stored app data remains on your device until you remove it, delete the app, or use the app's delete-data controls.</p>
     <p>If you are signed in, synced account data may remain in Firebase until you delete your account through the app's account deletion flow, subject to platform reauthentication requirements.</p>
-    <p>Subscription and billing records are maintained by Apple and RevenueCat under their own policies and retention practices.</p>
+    <p>Subscription and billing records may be maintained by Apple, the applicable web payment provider, RevenueCat, and us for the period needed to provide access, meet accounting or legal obligations, resolve disputes, and prevent fraud.</p>
+    <p>PostHog retains app analytics and recordings under the project's retention settings. Deleting local app data or your account does not automatically erase recordings already sent to PostHog. Contact us to request access to or deletion of this data.</p>
   </div>
 
   <div class="section">
@@ -267,6 +297,8 @@ body {
       <li>delete local app data from the device</li>
       <li>delete synced account data through the app if signed in</li>
       <li>disable notifications at any time in iOS settings</li>
+      <li>contact us to request access to or deletion of analytics and session recordings</li>
+      <li>turn off personal replies from Marc, or clear your conversation with Marc, in Profile &rarr; Privacy &amp; Security</li>
     </ul>
   </div>
 
@@ -286,7 +318,7 @@ body {
   </div>
 
   <div class="footer-note">
-    &copy; Stoic Widgets &nbsp;·&nbsp; <a href="/">stoic-meditations.com</a>
+    &copy; WIDGET WORKS LLP &nbsp;·&nbsp; <a href="/terms">Terms</a> &nbsp;·&nbsp; <a href="/refund">Refunds</a> &nbsp;·&nbsp; <a href="/">stoicmeditations.site</a>
   </div>
 
 </div>

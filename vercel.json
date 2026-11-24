@@ -8,7 +8,61 @@
       "includeFiles": "node_modules/.prisma/client/**"
     }
   },
+  "headers": [
+    {
+      "source": "/funnel",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/funnel/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/organic/instagram",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/organic/instagram/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/",
+      "destination": "/apps/home"
+    },
+    {
+      "source": "/quiet-reading-room",
+      "destination": "/apps/main"
+    },
     {
       "source": "/assets/(.*)",
       "destination": "/apps/assets/$1"
@@ -62,6 +116,14 @@
       "destination": "/apps/delete-account"
     },
     {
+      "source": "/pricing",
+      "destination": "/apps/pricing"
+    },
+    {
+      "source": "/refund",
+      "destination": "/apps/refund"
+    },
+    {
       "source": "/terms",
       "destination": "/apps/terms"
     },
@@ -76,6 +138,22 @@
     {
       "source": "/conversion/(.*)",
       "destination": "/apps/conversion/$1"
+    },
+    {
+      "source": "/funnel",
+      "destination": "/apps/funnel"
+    },
+    {
+      "source": "/funnel/(.*)",
+      "destination": "/apps/funnel/$1"
+    },
+    {
+      "source": "/organic/instagram",
+      "destination": "/apps/organic-instagram"
+    },
+    {
+      "source": "/organic/instagram/(.*)",
+      "destination": "/apps/organic-instagram/$1"
     },
     {
       "source": "/(.*)",

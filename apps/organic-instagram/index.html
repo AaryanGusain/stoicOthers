@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f3ed">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Stoic Widgets for iPhone and Android</title>
+  <meta
+    name="description"
+    content="Bring calm, clarity, and timeless Stoic wisdom to your Home Screen and Lock Screen."
+  >
+  <meta
+    name="apple-itunes-app"
+    content="app-id=6769972958, app-argument=https://stoicwidgets.onelink.me/wn42/instagram"
+  >
+  <script defer src="/organic/instagram/in-app-browser.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3ed;
+      --card: #fffdf9;
+      --ink: #171614;
+      --muted: #706b62;
+      --gold: #a7782b;
+      --line: rgba(23, 22, 20, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding:
+        max(32px, env(safe-area-inset-top))
+        max(22px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(22px, env(safe-area-inset-left));
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.96), transparent 42%),
+        var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    main {
+      width: min(100%, 680px);
+      text-align: center;
+    }
+
+    .app-icon {
+      display: block;
+      border-radius: 22.5%;
+      box-shadow:
+        0 16px 34px rgba(31, 28, 22, 0.14),
+        0 2px 7px rgba(31, 28, 22, 0.08);
+    }
+
+    .app-icon-large {
+      width: 94px;
+      height: 94px;
+      margin: 0 auto 24px;
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 2px;
+    }
+
+    .brand-bar .app-icon {
+      width: 50px;
+      height: 50px;
+      flex: 0 0 auto;
+      box-shadow: 0 8px 20px rgba(31, 28, 22, 0.12);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-name,
+    .brand-description {
+      margin: 0;
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .brand-description {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    .escape-hero {
+      margin-top: 42px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: 690;
+      letter-spacing: -0.05em;
+    }
+
+    .download-title {
+      font-size: clamp(2.2rem, 8vw, 3.7rem);
+      line-height: 0.98;
+    }
+
+    .escape-title {
+      max-width: 350px;
+      margin-inline: auto;
+      font-size: clamp(2.05rem, 9vw, 2.65rem);
+      line-height: 1.04;
+      text-wrap: balance;
+    }
+
+    .tagline,
+    .escape-intro {
+      color: var(--muted);
+      letter-spacing: -0.015em;
+    }
+
+    .tagline {
+      max-width: 520px;
+      margin: 18px auto 0;
+      font-size: clamp(1.02rem, 3.4vw, 1.23rem);
+      line-height: 1.5;
+    }
+
+    .escape-intro {
+      margin: 12px 0 0;
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+
+    .steps {
+      width: 100%;
+      margin: 28px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      text-align: left;
+    }
+
+    .step-card {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 253, 249, 0.94);
+      box-shadow: 0 10px 28px rgba(31, 28, 22, 0.055);
+    }
+
+    .step-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(167, 120, 43, 0.15);
+      border-radius: 15px;
+      background: #f3ecdf;
+    }
+
+    .step-icon img {
+      display: block;
+      width: 25px;
+      height: 25px;
+    }
+
+    .step-copy {
+      min-width: 0;
+    }
+
+    .step-number,
+    .step-title,
+    .step-detail {
+      margin: 0;
+    }
+
+    .step-number {
+      color: var(--gold);
+      font-size: 0.66rem;
+      font-weight: 750;
+      line-height: 1.2;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .step-title {
+      margin-top: 3px;
+      font-size: 1.02rem;
+      font-weight: 700;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+    }
+
+    .step-detail {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.38;
+    }
+
+    .escape-footer {
+      margin-top: auto;
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 18px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 550;
+      text-decoration: none;
+    }
+
+    .footer-links a:focus-visible,
+    .footer-links a:hover {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .copyright {
+      margin: 10px 0 0;
+      color: #938d84;
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 12px;
+      margin-top: 34px;
+    }
+
+    .badge {
+      display: grid;
+      place-items: center;
+      min-height: 64px;
+      border-radius: 10px;
+    }
+
+    .badge img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .badge-app-store,
+    .badge-google-play {
+      padding: 10px;
+      transition: transform 160ms ease, filter 160ms ease;
+      touch-action: manipulation;
+    }
+
+    .badge-app-store img {
+      width: 180px;
+    }
+
+    .badge-app-store:hover,
+    .badge-google-play:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+    }
+
+    .badge-app-store:focus-visible,
+    .badge-google-play:focus-visible {
+      outline: 3px solid rgba(23, 22, 20, 0.36);
+      outline-offset: 4px;
+    }
+
+    .badge-google-play img {
+      width: 220px;
+      max-width: none;
+      pointer-events: none;
+    }
+
+    .download-footer {
+      max-width: 590px;
+      margin: 40px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: #8b857b;
+      font-size: 0.68rem;
+      line-height: 1.55;
+    }
+
+    .download-footer .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .download-footer p {
+      margin: 0;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      align-items: end;
+      padding: 18px;
+      background: rgba(23, 22, 20, 0.34);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 180ms ease, visibility 180ms ease;
+    }
+
+    .modal-backdrop[data-open="true"] {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .fallback-modal {
+      width: min(100%, 480px);
+      margin: 0 auto;
+      padding: 25px 22px max(22px, env(safe-area-inset-bottom));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 28px 80px rgba(23, 22, 20, 0.24);
+      text-align: left;
+    }
+
+    .fallback-modal h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .fallback-modal > p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .fallback-modal ol {
+      margin: 20px 0 0;
+      padding-left: 22px;
+    }
+
+    .fallback-modal li {
+      margin-top: 8px;
+      padding-left: 4px;
+      font-size: 0.94rem;
+      line-height: 1.4;
+    }
+
+    .modal-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .retry-button,
+    .copy-button {
+      min-height: 50px;
+      border-radius: 13px;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .retry-button {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .copy-button {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+    }
+
+    @media (min-width: 560px) {
+      .modal-backdrop {
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app-icon-large {
+        width: 84px;
+        height: 84px;
+        margin-bottom: 22px;
+      }
+
+      .badges {
+        flex-direction: column;
+        gap: 0;
+        margin-top: 28px;
+      }
+
+      .badge-app-store img {
+        width: 188px;
+      }
+
+      .badge-google-play img {
+        width: 228px;
+      }
+
+      .download-footer {
+        margin-top: 30px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .step-card {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .step-icon {
+        width: 46px;
+        height: 46px;
+      }
+
+      .escape-title {
+        font-size: 1.9rem;
+      }
+    }
+
+    @media (max-height: 700px) {
+      .escape-hero {
+        margin-top: 28px;
+      }
+
+      .steps {
+        margin-top: 22px;
+      }
+
+      .escape-footer {
+        padding-top: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .badge-app-store,
+      .badge-google-play {
+        transition: none;
+      }
+
+      .modal-backdrop {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="download-content" aria-labelledby="download-title">
+      <img
+        class="app-icon app-icon-large"
+        src="/organic/instagram/assets/stoic-widgets-icon.jpg"
+        alt="Stoic Widgets app icon"
+        width="94"
+        height="94"
+      >
+      <h1 class="download-title" id="download-title">Stoic Widgets</h1>
+      <p class="tagline">
+        Daily Stoic wisdom on your Home Screen and Lock Screen.
+      </p>
+
+      <div class="badges" aria-label="Download options">
+        <a
+          class="badge badge-app-store"
+          data-download-link
+          href="https://stoicwidgets.onelink.me/wn42/instagram"
+          aria-label="Download Stoic Widgets on the App Store"
+        >
+          <img
+            src="/organic/instagram/assets/download-on-app-store.svg"
+            alt="Download on the App Store"
+            width="180"
+            height="60"
+          >
+        </a>
+
+        <a
+          class="badge badge-google-play"
+          data-download-link
+          href="https://app.appsflyer.com/com.aaryangusain.stoicwidgets?pid=instagram_organic&amp;c=instagram_bio"
+          aria-label="Get Stoic Widgets on Google Play"
+        >
+          <img
+            src="/organic/instagram/assets/get-it-on-google-play.png"
+            alt="Get it on Google Play"
+            width="220"
+            height="85"
+          >
+        </a>
+      </div>
+    </section>
+
+    <footer class="download-footer">
+      <nav class="footer-links" aria-label="Legal and support">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms</a>
+        <a href="/support">Support</a>
+      </nav>
+      <p>
+        Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other
+        countries. Google Play and the Google Play logo are trademarks of Google LLC.
+      </p>
+    </footer>
+  </main>
+
+  <div class="modal-backdrop" id="download-fallback" data-open="false" aria-hidden="true">
+    <section
+      class="fallback-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="fallback-title"
+    >
+      <h2 id="fallback-title">Open in your browser</h2>
+      <p>Instagram did not allow the automatic handoff. This manual route always works:</p>
+      <ol>
+        <li>Tap the three dots in the top-right corner.</li>
+        <li>Choose <strong>Open in external browser</strong>, <strong>Open in Safari</strong>, or <strong>Open in Chrome</strong>.</li>
+        <li>Tap your store button again.</li>
+      </ol>
+      <div class="modal-actions">
+        <button class="retry-button" id="retry-download" type="button">Try opening your browser again</button>
+        <button class="copy-button" id="copy-download" type="button">Copy download link</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var fallbackDestination = document.querySelector("[data-download-link]").href;
+      var fallback = document.getElementById("download-fallback");
+      var retryButton = document.getElementById("retry-download");
+      var copyButton = document.getElementById("copy-download");
+
+      function showFallback(destination) {
+        fallbackDestination = destination;
+        fallback.dataset.open = "true";
+        fallback.setAttribute("aria-hidden", "false");
+        retryButton.focus();
+      }
+
+      function retryDownload() {
+        fallback.dataset.open = "false";
+        fallback.setAttribute("aria-hidden", "true");
+        window.MetaBrowserEscape.openOutsideMeta(fallbackDestination, { onFallback: showFallback });
+      }
+
+      window.MetaBrowserEscape.bindDownloadLinks({ onFallback: showFallback });
+      retryButton.addEventListener("click", retryDownload);
+      copyButton.addEventListener("click", function () {
+        navigator.clipboard.writeText(fallbackDestination).then(function () {
+          copyButton.textContent = "Link copied";
+        }).catch(function () {
+          window.prompt("Copy this download link:", fallbackDestination);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

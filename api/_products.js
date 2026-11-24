@@ -2,10 +2,10 @@ const PRODUCTS = {
   book_pdf: {
     name: '14 Days to a Stoic Mind PDF',
     description: 'The complete 14-day reader as a downloadable PDF.',
-    usdAmount: 999,
-    inrAmount: 84900,
-    displayPrice: '$9.99',
-    listedPrice: '9.99',
+    usdAmount: 500,
+    inrAmount: 42500,
+    displayPrice: '$5',
+    listedPrice: '5.00',
     discountAmount: 0,
     deliverables: [
       {
@@ -19,10 +19,10 @@ const PRODUCTS = {
   audiobook: {
     name: '14 Days to a Stoic Mind Audiobook',
     description: 'All three narrated M4B editions.',
-    usdAmount: 999,
-    inrAmount: 84900,
-    displayPrice: '$9.99',
-    listedPrice: '9.99',
+    usdAmount: 500,
+    inrAmount: 42500,
+    displayPrice: '$5',
+    listedPrice: '5.00',
     discountAmount: 0,
     deliverables: [
       {
@@ -48,10 +48,10 @@ const PRODUCTS = {
   wallpaper_strength: {
     name: 'Wallpaper Bundle I: Strength & Discipline',
     description: '20 wallpapers for phone, tablet, and desktop.',
-    usdAmount: 500,
-    inrAmount: 42500,
-    displayPrice: '$5',
-    listedPrice: '5.00',
+    usdAmount: 100,
+    inrAmount: 8500,
+    displayPrice: '$1',
+    listedPrice: '1.00',
     discountAmount: 0,
     deliverables: [
       {
@@ -65,10 +65,10 @@ const PRODUCTS = {
   wallpaper_solitude: {
     name: 'Wallpaper Bundle II: Solitude & Stillness',
     description: '20 wallpapers for phone, tablet, and desktop.',
-    usdAmount: 500,
-    inrAmount: 42500,
-    displayPrice: '$5',
-    listedPrice: '5.00',
+    usdAmount: 100,
+    inrAmount: 8500,
+    displayPrice: '$1',
+    listedPrice: '1.00',
     discountAmount: 0,
     deliverables: [
       {
@@ -82,10 +82,10 @@ const PRODUCTS = {
   wallpaper_wisdom: {
     name: 'Wallpaper Bundle III: Wisdom & Reflection',
     description: '20 wallpapers for phone, tablet, and desktop.',
-    usdAmount: 500,
-    inrAmount: 42500,
-    displayPrice: '$5',
-    listedPrice: '5.00',
+    usdAmount: 100,
+    inrAmount: 8500,
+    displayPrice: '$1',
+    listedPrice: '1.00',
     discountAmount: 0,
     deliverables: [
       {
@@ -98,14 +98,29 @@ const PRODUCTS = {
   }
 };
 
+PRODUCTS.wallpaper_complete = {
+  name: 'All Wallpaper Bundles',
+  description: 'All three wallpaper bundles — Strength, Solitude, and Wisdom.',
+  usdAmount: 200,
+  inrAmount: 17000,
+  displayPrice: '$2',
+  listedPrice: '2.00',
+  discountAmount: 100,
+  deliverables: [
+    ...PRODUCTS.wallpaper_strength.deliverables,
+    ...PRODUCTS.wallpaper_solitude.deliverables,
+    ...PRODUCTS.wallpaper_wisdom.deliverables
+  ]
+};
+
 PRODUCTS.complete_pack = {
   name: 'Stoic Meditations Complete Pack',
   description: 'Book PDF, all three audiobook voices, and all wallpaper bundles.',
-  usdAmount: 2000,
-  inrAmount: 169900,
-  displayPrice: '$20',
-  listedPrice: '20.00',
-  discountAmount: 1499,
+  usdAmount: 1000,
+  inrAmount: 85000,
+  displayPrice: '$10',
+  listedPrice: '10.00',
+  discountAmount: 300,
   deliverables: [
     ...PRODUCTS.book_pdf.deliverables,
     ...PRODUCTS.audiobook.deliverables,

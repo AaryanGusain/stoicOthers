@@ -8,13 +8,15 @@
     "generate:book-pdf": "node scripts/generate-book-pdf.js",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate deploy",
-    "monthly:summary": "node scripts/monthly-summary.js"
+    "monthly:summary": "node scripts/monthly-summary.js",
+    "test": "node --test test/*.test.js"
   },
   "devDependencies": {
     "playwright": "^1.52.0",
     "prisma": "^6.19.3"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.3"
+    "@prisma/client": "^6.19.3",
+    "firebase-admin": "^13.10.0"
   }
 }
